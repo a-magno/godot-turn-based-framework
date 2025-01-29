@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw5jmcfbmqouo"]
+
+[ext_resource type="Script" path="res://Combatant.gd" id="1_ecchv"]
+[ext_resource type="Texture2D" uid="uid://rupsj1d8wims" path="res://icon.svg" id="2_4o5d1"]
+[ext_resource type="PackedScene" uid="uid://dw7axib8xxycl" path="res://ui/vitals.tscn" id="3_bfeaa"]
+
+[node name="Combatant" type="Node2D"]
+script = ExtResource("1_ecchv")
+metadata/_custom_type_script = ExtResource("1_ecchv")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_4o5d1")
+
+[node name="Vitals" parent="." node_paths=PackedStringArray("combatant") instance=ExtResource("3_bfeaa")]
+combatant = NodePath("..")

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Stats" load_steps=3 format=3 uid="uid://d1lmr2crcfi1w"]
+
+[ext_resource type="Script" uid="uid://crf5jr272kney" path="res://stats/classes/character_stats.gd" id="1_ott3w"]
+[ext_resource type="Script" uid="uid://dyhp300wmaa2d" path="res://status-effects-skills/classes/skill.gd" id="2_1pjfg"]
+
+[resource]
+script = ExtResource("1_ott3w")
+id = &"player"
+is_player = true
+max_health = 60
+attack = 15
+speed = 5
+skills = Array[ExtResource("2_1pjfg")]([])
+metadata/_custom_type_script = ExtResource("1_ott3w")

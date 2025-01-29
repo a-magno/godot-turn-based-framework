@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://b83hqummjkavk"]
+
+[ext_resource type="Script" path="res://battle_scene.gd" id="1_r5l0u"]
+[ext_resource type="Script" path="res://turn-based-combat/TurnManager.gd" id="2_5g7vw"]
+[ext_resource type="Script" path="res://stats/classes/character_stats.gd" id="2_sl17i"]
+[ext_resource type="Script" uid="uid://ccjthokxcamls" path="res://command-system/CommandQueue.gd" id="3_5g7vw"]
+[ext_resource type="Resource" uid="uid://d1lmr2crcfi1w" path="res://stats/resources/player.tres" id="3_x5h4l"]
+[ext_resource type="Resource" uid="uid://bbvm66wx5svex" path="res://stats/resources/enemy.tres" id="4_vtmj2"]
+
+[node name="BattleScene" type="Node2D"]
+script = ExtResource("1_r5l0u")
+test_stats = Array[ExtResource("2_sl17i")]([ExtResource("3_x5h4l"), ExtResource("4_vtmj2"), ExtResource("4_vtmj2")])
+
+[node name="Marker2D" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(183, 241)
+
+[node name="Marker2D2" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(471, 132)
+
+[node name="Marker2D3" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(471, 241)
+
+[node name="TurnManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_5g7vw")
+metadata/_custom_type_script = ExtResource("2_5g7vw")
+
+[node name="CommandQueue" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_5g7vw")
+
+[node name="play_round" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 11.0
+offset_top = 42.0
+offset_right = 106.0
+offset_bottom = 73.0
+text = "Play Round"
+
+[node name="EnemyAI" type="Node" parent="."]
+
+[node name="PlayerInput" type="Node" parent="."]
+
+[connection signal="get_commands" from="CommandQueue" to="TurnManager" method="play_turns"]
