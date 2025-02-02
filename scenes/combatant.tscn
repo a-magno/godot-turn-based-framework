@@ -1,16 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://bw5jmcfbmqouo"]
+[gd_scene load_steps=9 format=3 uid="uid://bw5jmcfbmqouo"]
 
 [ext_resource type="Script" path="res://Combatant.gd" id="1_ecchv"]
-[ext_resource type="Texture2D" uid="uid://rupsj1d8wims" path="res://icon.svg" id="2_4o5d1"]
+[ext_resource type="Shader" path="res://scenes/combatant.gdshader" id="2_bfeaa"]
+[ext_resource type="Texture2D" uid="uid://mcb6v6850rv0" path="res://assets/Pouch/Pouch.png" id="3_8636n"]
 [ext_resource type="PackedScene" uid="uid://dw7axib8xxycl" path="res://ui/vitals.tscn" id="3_bfeaa"]
+[ext_resource type="PackedScene" uid="uid://tw22funjeskh" path="res://scenes/player_target_area.tscn" id="4_4o5d1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8636n"]
+resource_local_to_scene = true
+shader = ExtResource("2_bfeaa")
+shader_parameter/enabled = false
+shader_parameter/width = 3
+shader_parameter/outline_color = Color(1, 0, 0, 1)
+shader_parameter/flickering_speed = 5.0
+shader_parameter/minimal_flickering_alpha = 0.2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srv24"]
+atlas = ExtResource("3_8636n")
+region = Rect2(33.3224, 37.2232, 117.355, 118.182)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bfeaa"]
+radius = 40.0
 
 [node name="Combatant" type="Node2D"]
 script = ExtResource("1_ecchv")
 metadata/_custom_type_script = ExtResource("1_ecchv")
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="Skin" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8636n")
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_4o5d1")
+texture = SubResource("AtlasTexture_srv24")
 
 [node name="Vitals" parent="." node_paths=PackedStringArray("combatant") instance=ExtResource("3_bfeaa")]
 combatant = NodePath("..")
+
+[node name="Area2D" parent="." node_paths=PackedStringArray("skin") instance=ExtResource("4_4o5d1")]
+skin = NodePath("../Skin")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_bfeaa")
+
+[editable path="Area2D"]

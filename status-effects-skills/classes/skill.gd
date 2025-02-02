@@ -9,6 +9,7 @@ enum Targets { SELF, SINGLE, ALL_ENEMIES }
 @export var target : Targets
 var _caster : Node
 
+
 @export_group("Visuals")
 @export var icon : Texture
 @export_multiline var tooltip : String
@@ -30,14 +31,14 @@ func _get_targets( targets : Array[Node])->Array[Node]:
 		Targets.SELF:
 			return [_caster]
 		Targets.ALL_ENEMIES:
-			return tree.get_nodes_in_group(GameManager.GROUPS.ENEMIES)
+			return tree.get_nodes_in_group(GameManager.GROUPS.ENEMIES.id)
 		_:
 			return []
 
 func use( targets : Array[Node] )->void:
 	# EventBus.player_onSkillCast.emit()
 	# if _caster != null: _caster.stamina -= cost
-	
+	print("using skill %s" % self.id)
 	if is_single_target():
 		apply_effects(targets)
 	else:

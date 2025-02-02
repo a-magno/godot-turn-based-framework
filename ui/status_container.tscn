@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://6po8lrdu21ds"]
+
+[ext_resource type="Script" path="res://ui/status_container.gd" id="1_bvtra"]
+
+[node name="StatusContainerUI" type="GridContainer"]
+theme_override_constants/h_separation = -6
+columns = 6
+script = ExtResource("1_bvtra")
+
+[node name="StatusUI" parent="." instance_placeholder="res://ui/status_ui.tscn"]
+layout_mode = 2
+
+[node name="StatusUI2" parent="." instance_placeholder="res://ui/status_ui.tscn"]
+layout_mode = 2
+
+[node name="StatusUI3" parent="." instance_placeholder="res://ui/status_ui.tscn"]
+layout_mode = 2
+
+[node name="StatusUI4" parent="." instance_placeholder="res://ui/status_ui.tscn"]
+layout_mode = 2
+
+[node name="StatusUI5" parent="." instance_placeholder="res://ui/status_ui.tscn"]
+layout_mode = 2
+
+[node name="StatusUI6" parent="." instance_placeholder="res://ui/status_ui.tscn"]
+layout_mode = 2

@@ -3,12 +3,17 @@ extends VBoxContainer
 @export var combatant : Combatant :
 	set(c):
 		combatant = c
-		
+
+func _process(delta: float) -> void:
+	%Name.text = combatant.name
+
 func initialize()->void:
 	%Healthbar.max_value = combatant.max_health
 	%Healthbar.value = combatant.max_health
 	_update_label(%Healthbar.value, %Healthbar.max_value)
 	%Name.text = combatant.name
+	var status_handler : StatusHandler = combatant.find_child("*StatusHandler*")
+	status_handler.statuses_applied.connect( %StatusContainer.add_status )
 	combatant.health_changed.connect(_on_health_changed)
 
 func _on_health_changed(value)->void:
@@ -17,4 +22,4 @@ func _on_health_changed(value)->void:
 	tween.tween_method(_update_label.bind(%Healthbar.max_value), %Healthbar.value, value, 0.3)
 
 func _update_label(value, max_value)->void:
-	%HealthLabel.text = "%d / %d" % [value, max_value]
+	%HealthLabel.text = "%d / %d" % [clamp(value, 0, max_value), max_value]

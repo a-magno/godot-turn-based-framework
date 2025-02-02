@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Status" load_steps=2 format=3 uid="uid://ovd0qkciwmb8"]
+
+[ext_resource type="Script" uid="uid://d5vg0rshoux8" path="res://status-effects-skills/classes/status.gd" id="1_gskvv"]
+
+[resource]
+script = ExtResource("1_gskvv")
+id = &"bleeding"
+duration = 3
+max_stacks = 0
+tooltip = ""

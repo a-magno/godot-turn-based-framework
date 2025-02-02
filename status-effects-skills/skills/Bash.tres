@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://csp61myybocek"]
+
+[ext_resource type="Script" uid="uid://dyhp300wmaa2d" path="res://status-effects-skills/classes/skill.gd" id="1_k6uep"]
+
+[sub_resource type="GDScript" id="GDScript_k6uep"]
+script/source = "extends Skill
+
+@export var damage_bonus : int
+
+func apply_effects(_targets : Array[Node])->void:
+	for target in _targets:
+		_caster.queue_command( AttackCommand.new( target )
+		.set_attacker(_caster).modify_damage(damage_bonus) )
+"
+
+[resource]
+script = SubResource("GDScript_k6uep")
+damage_bonus = 20
+id = &"bash"
+cost = 0
+target = 1
+tooltip = ""
+metadata/_custom_type_script = ExtResource("1_k6uep")

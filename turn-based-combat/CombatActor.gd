@@ -9,15 +9,24 @@ signal turn_ended( actor : CombatActor )
 @export var active : bool = true :
 	set = set_active
 
+var acted : bool = false
+
+func turn_start()->void:
+	acted = false
+	active = true
+	turn_started.emit(self)
+
+func turn_end()->void:
+	active = false
+	turn_ended.emit(self)
+
+
 func play_turn()->void:
 	pass
 
-func turn_start()->void:
-	turn_started.emit( self )
 
-func turn_end()->void:
-	turn_ended.emit( self )
-
+func can_act()->bool:
+	return active
 
 func set_active( a : bool )->void:
 	active = a

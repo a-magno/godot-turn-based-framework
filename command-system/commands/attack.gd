@@ -5,10 +5,8 @@ var target : Combatant
 var attacker : Combatant
 var damage : int
 
-func _init( _target : Combatant, _attacker : Combatant )->void:
+func _init( _target : Combatant )->void:
 	target = _target
-	damage = _attacker.damage
-	attacker = _attacker
 
 func execute():
 	if not attacker.is_alive() or not is_instance_valid(target):
@@ -18,3 +16,16 @@ func execute():
 	var dmg_effect = DamageEffect.new( damage )
 	dmg_effect.execute([target])
 	#target.take_damage( damage )
+
+func modify_damage( value : int )->AttackCommand:
+	damage += value
+	return self
+
+func set_attacker( a : CombatActor )->AttackCommand:
+	attacker = a
+	set_damage( attacker.damage )
+	return self
+
+func set_damage( d : int )->AttackCommand:
+	damage = d
+	return self

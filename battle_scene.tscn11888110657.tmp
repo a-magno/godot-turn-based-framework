@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b83hqummjkavk"]
+[gd_scene load_steps=8 format=3 uid="uid://b83hqummjkavk"]
 
 [ext_resource type="Script" uid="uid://b0rw8vu7octnk" path="res://battle_scene.gd" id="1_r5l0u"]
-[ext_resource type="Script" path="res://turn-based-combat/TurnManager.gd" id="2_5g7vw"]
+[ext_resource type="Script" uid="uid://dqbiwp1pq1031" path="res://turn-based-combat/TurnManager.gd" id="2_5g7vw"]
 [ext_resource type="Script" uid="uid://crf5jr272kney" path="res://stats/classes/character_stats.gd" id="2_sl17i"]
 [ext_resource type="Script" uid="uid://ccjthokxcamls" path="res://command-system/CommandQueue.gd" id="3_5g7vw"]
 [ext_resource type="Resource" uid="uid://d1lmr2crcfi1w" path="res://stats/resources/player.tres" id="3_x5h4l"]
 [ext_resource type="Resource" uid="uid://bbvm66wx5svex" path="res://stats/resources/enemy.tres" id="4_vtmj2"]
-[ext_resource type="Script" path="res://enemy_ai.gd" id="7_vtmj2"]
 [ext_resource type="PackedScene" uid="uid://dogm08wo1wqu1" path="res://ui/player ui/player_input_ui.tscn" id="7_x5h4l"]
 
 [node name="BattleScene" type="Node2D"]
@@ -43,12 +42,16 @@ offset_bottom = 73.0
 text = "Play Round"
 
 [node name="EnemyAI" type="Node" parent="."]
-script = ExtResource("7_vtmj2")
+
+[node name="PlayerInput" type="Node" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PlayerInput UI" parent="CanvasLayer" instance=ExtResource("7_x5h4l")]
+offset_left = -394.0
+offset_top = 11.0
+offset_right = -394.0
+offset_bottom = 11.0
 
-[connection signal="active_actor_changed" from="TurnManager" to="EnemyAI" method="_on_actor_active_changed"]
 [connection signal="active_actor_changed" from="TurnManager" to="CanvasLayer/PlayerInput UI" method="_set_player"]
 [connection signal="get_commands" from="CommandQueue" to="TurnManager" method="play_turns"]

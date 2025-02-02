@@ -24,6 +24,7 @@ func execute_all():
 		# Put commands in command history
 		if log_commands:
 			_command_history.push_front(command)
+		await get_tree().create_timer(0.5).timeout
 
 func clear()->void:
 	command_stack.clear()

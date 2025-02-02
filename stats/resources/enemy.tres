@@ -1,12 +1,11 @@
 [gd_resource type="Resource" script_class="Stats" load_steps=3 format=3 uid="uid://bbvm66wx5svex"]
 
-[ext_resource type="Script" path="res://stats/classes/character_stats.gd" id="1_g1gp6"]
-[ext_resource type="Script" path="res://status-effects-skills/classes/skill.gd" id="2_ixv7d"]
+[ext_resource type="Script" uid="uid://crf5jr272kney" path="res://stats/classes/character_stats.gd" id="1_g1gp6"]
+[ext_resource type="Script" uid="uid://dyhp300wmaa2d" path="res://status-effects-skills/classes/skill.gd" id="2_ixv7d"]
 
 [resource]
 script = ExtResource("1_g1gp6")
-id = &"enemy A"
-is_player = false
+id = &"enemy"
 max_health = 40
 attack = 5
 speed = 2
