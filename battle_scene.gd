@@ -30,10 +30,8 @@ func _ready() -> void:
 		combatant.position = positions[0] if stat.is_player else positions.pop_at(1)
 
 		if %TurnManager.has_node("%s" % combatant.name) and combatant.is_in_group(GameManager.GROUPS.ENEMIES.id):
-			print(combatant.name)
 			var letters = TurnManager.NAME_DIFFERENTIATORS
 			combatant.name += " %s" % letters.pop_front()
-			print(combatant.name)
 
 	begin_combat()
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bw5jmcfbmqouo"]
+[gd_scene load_steps=10 format=3 uid="uid://bw5jmcfbmqouo"]
 
 [ext_resource type="Script" path="res://Combatant.gd" id="1_ecchv"]
 [ext_resource type="Shader" path="res://scenes/combatant.gdshader" id="2_bfeaa"]
 [ext_resource type="Texture2D" uid="uid://mcb6v6850rv0" path="res://assets/Pouch/Pouch.png" id="3_8636n"]
 [ext_resource type="PackedScene" uid="uid://dw7axib8xxycl" path="res://ui/vitals.tscn" id="3_bfeaa"]
 [ext_resource type="PackedScene" uid="uid://tw22funjeskh" path="res://scenes/player_target_area.tscn" id="4_4o5d1"]
+[ext_resource type="Script" path="res://status-effects-skills/classes/status_handler.gd" id="6_i344d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8636n"]
 resource_local_to_scene = true
@@ -22,8 +23,9 @@ region = Rect2(33.3224, 37.2232, 117.355, 118.182)
 [sub_resource type="CircleShape2D" id="CircleShape2D_bfeaa"]
 radius = 40.0
 
-[node name="Combatant" type="Node2D"]
+[node name="Combatant" type="Node2D" node_paths=PackedStringArray("status_handler")]
 script = ExtResource("1_ecchv")
+status_handler = NodePath("StatusHandler")
 metadata/_custom_type_script = ExtResource("1_ecchv")
 
 [node name="Skin" type="Sprite2D" parent="."]
@@ -32,6 +34,8 @@ scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_srv24")
 
 [node name="Vitals" parent="." node_paths=PackedStringArray("combatant") instance=ExtResource("3_bfeaa")]
+offset_top = -104.0
+offset_bottom = -37.0
 combatant = NodePath("..")
 
 [node name="Area2D" parent="." node_paths=PackedStringArray("skin") instance=ExtResource("4_4o5d1")]
@@ -39,5 +43,9 @@ skin = NodePath("../Skin")
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource("CircleShape2D_bfeaa")
+
+[node name="StatusHandler" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("6_i344d")
+target = NodePath("..")
 
 [editable path="Area2D"]

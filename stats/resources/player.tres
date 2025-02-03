@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Stats" load_steps=4 format=3 uid="uid://d1lmr2crcfi1w"]
+[gd_resource type="Resource" script_class="Stats" load_steps=5 format=3 uid="uid://d1lmr2crcfi1w"]
 
-[ext_resource type="Script" uid="uid://crf5jr272kney" path="res://stats/classes/character_stats.gd" id="1_ott3w"]
-[ext_resource type="Script" uid="uid://dyhp300wmaa2d" path="res://status-effects-skills/classes/skill.gd" id="2_1pjfg"]
+[ext_resource type="Script" path="res://stats/classes/character_stats.gd" id="1_ott3w"]
+[ext_resource type="Script" path="res://status-effects-skills/classes/skill.gd" id="2_1pjfg"]
 [ext_resource type="Resource" uid="uid://csp61myybocek" path="res://status-effects-skills/skills/Bash.tres" id="3_1pjfg"]
+[ext_resource type="Resource" uid="uid://drvncmm5d8k8d" path="res://status-effects-skills/skills/Stab.tres" id="4_nn4lg"]
 
 [resource]
 script = ExtResource("1_ott3w")
@@ -11,5 +12,5 @@ is_player = true
 max_health = 60
 attack = 10
 speed = 5
-skills = Array[ExtResource("2_1pjfg")]([ExtResource("3_1pjfg")])
+skills = Array[ExtResource("2_1pjfg")]([ExtResource("3_1pjfg"), ExtResource("4_nn4lg")])
 metadata/_custom_type_script = ExtResource("1_ott3w")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dw7axib8xxycl"]
 
-[ext_resource type="Script" uid="uid://dct3k4mx7eq6v" path="res://ui/vitals.gd" id="1_wrqut"]
+[ext_resource type="Script" path="res://ui/vitals.gd" id="1_wrqut"]
 [ext_resource type="PackedScene" uid="uid://6po8lrdu21ds" path="res://ui/status_container.tscn" id="2_8gjgu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xihkb"]
@@ -19,13 +19,14 @@ corner_radius_bottom_left = 4
 offset_left = -112.0
 offset_top = -32.0
 offset_right = 112.0
-offset_bottom = 16.0
+offset_bottom = 52.0
 script = ExtResource("1_wrqut")
 
 [node name="Name" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
+theme_override_constants/outline_size = 8
 text = "Name"
 horizontal_alignment = 1
 

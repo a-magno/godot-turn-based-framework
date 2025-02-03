@@ -12,7 +12,7 @@ func execute():
 	if not attacker.is_alive() or not is_instance_valid(target):
 		return
 	
-	print("\n%s attacked %s for %d damage!\n" % [attacker.name, target.name, damage])
+	#print("\n%s attacked %s for %d damage!\n" % [attacker.name, target.name, damage])
 	var dmg_effect = DamageEffect.new( damage )
 	dmg_effect.execute([target])
 	#target.take_damage( damage )

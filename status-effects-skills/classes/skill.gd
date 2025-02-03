@@ -26,7 +26,6 @@ func set_caster( node : Node )->Skill:
 func _get_targets( targets : Array[Node])->Array[Node]:
 	if not targets: return []
 	var tree := targets[0].get_tree()
-	print_debug(tree)
 	match target:
 		Targets.SELF:
 			return [_caster]
@@ -38,7 +37,7 @@ func _get_targets( targets : Array[Node])->Array[Node]:
 func use( targets : Array[Node] )->void:
 	# EventBus.player_onSkillCast.emit()
 	# if _caster != null: _caster.stamina -= cost
-	print("using skill %s" % self.id)
+	#print("using skill %s" % self.id)
 	if is_single_target():
 		apply_effects(targets)
 	else:

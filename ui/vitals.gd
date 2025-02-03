@@ -13,7 +13,7 @@ func initialize()->void:
 	_update_label(%Healthbar.value, %Healthbar.max_value)
 	%Name.text = combatant.name
 	var status_handler : StatusHandler = combatant.find_child("*StatusHandler*")
-	status_handler.statuses_applied.connect( %StatusContainer.add_status )
+	status_handler.new_status_added.connect( %StatusContainer.add_status )
 	combatant.health_changed.connect(_on_health_changed)
 
 func _on_health_changed(value)->void:

@@ -29,39 +29,32 @@ signal health_changed(new_value)
 		speed = s
 @export var damage : int
 
-
+@export var status_handler : StatusHandler
 
 func _ready() -> void:
 	randomize()
 	$Vitals.initialize()
+	status_handler.target = self
+
+func turn_start()->void:
+	super()
+	status_handler.apply_status_by_type( Status.Type.TURN_START )
+	
+func turn_end()->void:
+	super()
+	status_handler.apply_status_by_type( Status.Type.TURN_END )
 
 func set_active( _a : bool ):
 	if health <= 0:
 		return
 	super(_a)
 
-#region TEST
-func test_attack()->void:
-	var targets : Array = get_tree().get_nodes_in_group(target_group)
-	#print_debug("%s's choices: %s" % [name, str(targets)])
-	if targets.size() > 0:
-		var target
-		while not is_instance_valid(target):
-			target = targets.pick_random() as CombatActor
-
-		action_queued.emit( AttackCommand.new( target )
-							.set_priority(speed)
-							.modify_damage( randi_range(-2, 2) ) 
-							)
-		turn_end()
-
-#endregion
 
 func queue_command( command : Command )->void:
 	if acted: return
-	#print("Command queued")
 	action_queued.emit(command)
-	acted = true
+	#acted = true
+	#print("Command queued")
 	turn_end()
 
 

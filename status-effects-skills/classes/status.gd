@@ -34,4 +34,5 @@ func set_stacks( value : int )->void:
 
 func set_duration( value : int )->void:
 	duration = value
+	print_debug("%s duration changed to %d" % [id, value])
 	status_changed.emit()

@@ -1,14 +1,14 @@
 extends TextureRect
 
-var status : Status : set = set_status
+var status : Status #: set = set_status
 
 @onready var duration: Label = %Duration
 @onready var stacks: Label = %Stacks
 
 func set_status(new_status: Status) -> void:
-	if not is_node_ready():
-		await ready
-	
+	#if not is_node_ready():
+		#await ready
+	#
 	status = new_status
 	texture = status.icon
 	duration.visible = status.stack_type == Status.Stack.DURATION

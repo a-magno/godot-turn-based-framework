@@ -8,14 +8,14 @@ signal new_status_added( status : Status )
 signal statuses_applied( type : Status.Type )
 @export var target : Node
 
-var status_stack : Array[Status]
+var status_stack : Dictionary = {}
 
 func apply_status_by_type( status_type : Status.Type )->void:
 	if status_type == Status.Type.EVENT: return
-	var queue : Array[Status] = _get_all_status().filter(
+	var queue = _get_all_status().filter(
 		func( status : Status ):
 			return status.type == status_type
-	)
+	) as Array[Status]
 	if queue.is_empty():
 		statuses_applied.emit( status_type )
 		return
@@ -35,7 +35,7 @@ func add_status( status : Status )->void:
 	if not _has_status( status.id ):
 		var new_status = status
 		new_status.initialize( target )
-		status_stack.push_front( new_status )
+		status_stack.merge( { new_status.id : new_status } )
 		new_status_added.emit( status )
 		return
 	
@@ -48,16 +48,10 @@ func add_status( status : Status )->void:
 		_get_status( status.id ).stacks += status.stacks
 
 func _has_status( id : StringName )->bool:
-	for status in status_stack:
-		if status.id == id:
-			return true
-	return false
+	return status_stack.has( id )
 
 func _get_status( id : StringName )->Status:
-	for status in status_stack:
-		if status.id == id:
-			return status
-	return null
+	return status_stack.get(id, null)
 
-func _get_all_status()->Array[Status]:
-	return status_stack
+func _get_all_status()->Array:
+	return status_stack.values() 
