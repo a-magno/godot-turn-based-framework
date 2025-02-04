@@ -34,6 +34,8 @@ func add_status( status : Status )->void:
 	var is_stackable : bool = status.stack_type != Status.Stack.NONE
 	if not _has_status( status.id ):
 		var new_status = status
+		new_status.status_applied.connect(_on_status_applied)
+		new_status.status_changed.connect(_on_status_changed)
 		new_status.initialize( target )
 		status_stack.merge( { new_status.id : new_status } )
 		new_status_added.emit( status )
@@ -55,3 +57,13 @@ func _get_status( id : StringName )->Status:
 
 func _get_all_status()->Array:
 	return status_stack.values() 
+
+func _on_status_applied(status: Status) -> void:
+	if status.can_expire:
+		status.duration -= 1
+
+func _on_status_changed( status : Status )->void:
+	if status.can_expire() and status.duration <= 0:
+		status_stack.erase( status.id )
+	if status.stack_type == Status.Stack.INTENSITY and status.stacks == 0:
+		status_stack.erase( status.id )

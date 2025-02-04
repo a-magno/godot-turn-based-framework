@@ -2,7 +2,7 @@ extends Resource
 class_name Status
 
 signal status_applied( status : Status )
-signal status_changed
+signal status_changed( status : Status )
 
 enum Type {TURN_START, TURN_END, ROUND_START, ROUND_END, EVENT}
 enum Stack {NONE, INTENSITY, DURATION}
@@ -30,9 +30,9 @@ func can_expire()->bool:
 
 func set_stacks( value : int )->void:
 	stacks = value
-	status_changed.emit()
+	status_changed.emit( self )
 
 func set_duration( value : int )->void:
 	duration = value
-	print_debug("%s duration changed to %d" % [id, value])
-	status_changed.emit()
+	#print_debug("%s duration changed to %d" % [id, value])
+	status_changed.emit( self )

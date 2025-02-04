@@ -30,6 +30,6 @@ bonus_damage = 0
 status = ExtResource("2_xkyjc")
 id = &"stab"
 cost = 0
-target = 2
+target = 1
 icon = SubResource("AtlasTexture_l51nc")
 tooltip = ""

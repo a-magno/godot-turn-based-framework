@@ -13,7 +13,6 @@ var bleed_percent := 0.05
 
 func apply(target : Node)->void:
 	if not target is Combatant: return
-	duration -= 1
 	target.health -= target.max_health * bleed_percent
 "
 

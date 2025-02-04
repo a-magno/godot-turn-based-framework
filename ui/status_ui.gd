@@ -23,9 +23,9 @@ func set_status(new_status: Status) -> void:
 	if not status.status_changed.is_connected(_on_status_changed):
 		status.status_changed.connect(_on_status_changed)
 	
-	_on_status_changed()
+	_on_status_changed( status )
 
-func _on_status_changed() -> void:
+func _on_status_changed( status : Status ) -> void:
 	if not status:
 		return
 

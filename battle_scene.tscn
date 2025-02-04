@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://battle_scene.gd" id="1_r5l0u"]
 [ext_resource type="Script" path="res://turn-based-combat/TurnManager.gd" id="2_5g7vw"]
-[ext_resource type="Script" path="res://stats/classes/character_stats.gd" id="2_sl17i"]
-[ext_resource type="Script" path="res://command-system/CommandQueue.gd" id="3_5g7vw"]
+[ext_resource type="Script" uid="uid://crf5jr272kney" path="res://stats/classes/character_stats.gd" id="2_sl17i"]
+[ext_resource type="Script" uid="uid://ccjthokxcamls" path="res://command-system/CommandQueue.gd" id="3_5g7vw"]
 [ext_resource type="Resource" uid="uid://d1lmr2crcfi1w" path="res://stats/resources/player.tres" id="3_x5h4l"]
 [ext_resource type="Resource" uid="uid://bbvm66wx5svex" path="res://stats/resources/enemy.tres" id="4_vtmj2"]
 [ext_resource type="Script" path="res://enemy_ai.gd" id="7_vtmj2"]
