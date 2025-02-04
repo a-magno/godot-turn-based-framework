@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Attribute" load_steps=2 format=3 uid="uid://cvh0q3mtng18m"]
+
+[ext_resource type="Script" path="res://stat system/classes/attribute.gd" id="1_mqjvu"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_mqjvu")
+id = &"health"
+target_stat = &"max_health"
+min_value = 0.0

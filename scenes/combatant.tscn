@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bw5jmcfbmqouo"]
+[gd_scene load_steps=13 format=3 uid="uid://bw5jmcfbmqouo"]
 
 [ext_resource type="Script" path="res://Combatant.gd" id="1_ecchv"]
 [ext_resource type="Shader" path="res://scenes/combatant.gdshader" id="2_bfeaa"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dw7axib8xxycl" path="res://ui/vitals.tscn" id="3_bfeaa"]
 [ext_resource type="PackedScene" uid="uid://tw22funjeskh" path="res://scenes/player_target_area.tscn" id="4_4o5d1"]
 [ext_resource type="Script" path="res://status-effects-skills/classes/status_handler.gd" id="6_i344d"]
+[ext_resource type="Script" path="res://stat system/classes/attribute_container.gd" id="7_6ebhh"]
+[ext_resource type="Script" path="res://stat system/classes/attribute.gd" id="8_essbq"]
+[ext_resource type="Resource" uid="uid://cvh0q3mtng18m" path="res://stat system/attributes/health.tres" id="9_gxpmf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8636n"]
 resource_local_to_scene = true
@@ -47,5 +50,9 @@ shape = SubResource("CircleShape2D_bfeaa")
 [node name="StatusHandler" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("6_i344d")
 target = NodePath("..")
+
+[node name="AttributeContainer" type="Node" parent="."]
+script = ExtResource("7_6ebhh")
+attributes = Array[ExtResource("8_essbq")]([ExtResource("9_gxpmf")])
 
 [editable path="Area2D"]

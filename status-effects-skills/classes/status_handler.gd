@@ -59,7 +59,7 @@ func _get_all_status()->Array:
 	return status_stack.values() 
 
 func _on_status_applied(status: Status) -> void:
-	if status.can_expire:
+	if status.can_expire():
 		status.duration -= 1
 
 func _on_status_changed( status : Status )->void:
