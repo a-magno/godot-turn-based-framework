@@ -5,7 +5,7 @@ signal action_queued( command : Command )
 
 signal health_changed(new_value)
 
-@export var target_group : StringName = GameManager.GROUPS.PLAYERS.id
+#@export var target_group : StringName = GameManager.GROUPS.PLAYERS.id
 
 @export var stats : Stats :
 	set(s):
@@ -35,14 +35,8 @@ func _ready() -> void:
 	randomize()
 	$Vitals.initialize()
 	status_handler.target = self
-
-func turn_start()->void:
-	super()
-	status_handler.apply_status_by_type( Status.Type.TURN_START )
-	
-func turn_end()->void:
-	super()
-	status_handler.apply_status_by_type( Status.Type.TURN_END )
+	GameManager.event.combat_round_start.connect(_on_round_start)
+	GameManager.event.combat_round_start.connect(_on_round_end)
 
 func set_active( _a : bool ):
 	if health <= 0:
@@ -70,4 +64,10 @@ func is_alive()->bool:
 func print_stats():
 	print("\nName: %s\nMax HP: %d\nDamage: %d\nSpeed: %d\n" % [name, max_health, damage, speed])
 
+
+func _on_round_start()->void:
+	status_handler.apply_status_by_type( Status.Type.TURN_START )
+
+func _on_round_end()->void:
+	status_handler.apply_status_by_type( Status.Type.TURN_END )
 # EOF #

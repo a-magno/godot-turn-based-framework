@@ -16,7 +16,7 @@ var _mult : float = 0 :
 		calculate()
 var value : float :
 	get(): 
-		calculate()
+		#calculate()
 		return value
 	set(v):
 		value = v

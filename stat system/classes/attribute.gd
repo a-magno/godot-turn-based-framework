@@ -11,11 +11,15 @@ var stat : Stat :
 		stat = s
 		if stat == null: return
 		max_value = stat.value
+		value == max_value
 		stat.stat_changed.connect(_on_max_stat_changed)
+
+# Internal value
+var value : float
 # Determines current value
-var current_value : Stat = Stat.new(id, stat.value):
-	set(v):
-		current_value = v
+#var current_value : Stat = Stat.new(id, stat.value):
+	#set(v):
+		#current_value = v
 		#if not current_value: return
 		#if current_value.stat_changed.is_connected(_set_internal): return
 		#current_value.stat_changed.connect(_set_internal)
@@ -29,7 +33,7 @@ func _on_max_stat_changed( stat : Stat )->void:
 	max_value = stat.value
 
 func increase( amount : float )->void:
-	current_value.value += amount
+	value += amount
 
 func decrease( amount : float )->void:
-	current_value.value -= amount
+	value -= amount
