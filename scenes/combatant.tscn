@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bw5jmcfbmqouo"]
+[gd_scene load_steps=14 format=3 uid="uid://bw5jmcfbmqouo"]
 
 [ext_resource type="Script" path="res://Combatant.gd" id="1_ecchv"]
 [ext_resource type="Shader" path="res://scenes/combatant.gdshader" id="2_bfeaa"]
 [ext_resource type="Texture2D" uid="uid://mcb6v6850rv0" path="res://assets/Pouch/Pouch.png" id="3_8636n"]
 [ext_resource type="PackedScene" uid="uid://dw7axib8xxycl" path="res://ui/vitals.tscn" id="3_bfeaa"]
 [ext_resource type="PackedScene" uid="uid://tw22funjeskh" path="res://scenes/player_target_area.tscn" id="4_4o5d1"]
+[ext_resource type="PackedScene" uid="uid://dejkj5bbgdbdc" path="res://ui/stat_viewer.tscn" id="5_fp0kh"]
 [ext_resource type="Script" path="res://status-effects-skills/classes/status_handler.gd" id="6_i344d"]
 [ext_resource type="Script" path="res://stat system/classes/attribute_container.gd" id="7_6ebhh"]
 [ext_resource type="Script" path="res://stat system/classes/attribute.gd" id="8_essbq"]
@@ -26,9 +27,10 @@ region = Rect2(33.3224, 37.2232, 117.355, 118.182)
 [sub_resource type="CircleShape2D" id="CircleShape2D_bfeaa"]
 radius = 40.0
 
-[node name="Combatant" type="Node2D" node_paths=PackedStringArray("status_handler")]
+[node name="Combatant" type="Node2D" node_paths=PackedStringArray("status_handler", "attribute_container")]
 script = ExtResource("1_ecchv")
 status_handler = NodePath("StatusHandler")
+attribute_container = NodePath("AttributeContainer")
 metadata/_custom_type_script = ExtResource("1_ecchv")
 
 [node name="Skin" type="Sprite2D" parent="."]
@@ -37,9 +39,26 @@ scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_srv24")
 
 [node name="Vitals" parent="." node_paths=PackedStringArray("combatant") instance=ExtResource("3_bfeaa")]
-offset_top = -104.0
-offset_bottom = -37.0
+offset_left = -80.0
+offset_top = -112.0
+offset_right = 82.0
+offset_bottom = -21.0
 combatant = NodePath("..")
+
+[node name="StatViewer" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("5_fp0kh")]
+unique_name_in_owner = true
+visible = false
+z_index = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 48.0
+offset_top = -24.0
+offset_right = 272.0
+offset_bottom = -24.0
+grow_horizontal = 1
+grow_vertical = 1
+actor = NodePath("..")
 
 [node name="Area2D" parent="." node_paths=PackedStringArray("skin") instance=ExtResource("4_4o5d1")]
 skin = NodePath("../Skin")
@@ -53,6 +72,14 @@ target = NodePath("..")
 
 [node name="AttributeContainer" type="Node" parent="."]
 script = ExtResource("7_6ebhh")
+base_stats = {
+"max_health": 50,
+"might": 10.0,
+"will": 10.0,
+"wit": 10.0
+}
 attributes = Array[ExtResource("8_essbq")]([ExtResource("9_gxpmf")])
+
+[connection signal="health_changed" from="." to="Area2D" method="_on_combatant_health_changed"]
 
 [editable path="Area2D"]

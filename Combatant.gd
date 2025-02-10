@@ -11,7 +11,7 @@ signal health_changed(new_value)
 	set(s):
 		stats = s
 		if stats == null: return
-		max_health = stats.max_health
+		#max_health = stats.max_health
 		damage = stats.attack
 		speed = stats.speed
 
@@ -30,11 +30,24 @@ signal health_changed(new_value)
 @export var damage : int
 
 @export var status_handler : StatusHandler
+@export var attribute_container : AttributeContainer
 
 func _ready() -> void:
 	randomize()
-	$Vitals.initialize()
 	status_handler.target = self
+	max_health = attribute_container.get_stat("max_health").value
+	health = attribute_container.get_attribute("health").value
+	#attribute_container.get_attribute("health").value_changed.connect(
+		#func(v):
+			#health = v
+	#)
+	health_changed.connect(
+		func(v):
+			attribute_container.get_attribute("health").value = v
+	)
+	
+	$Vitals.initialize()
+	
 	GameManager.event.combat_round_start.connect(_on_round_start)
 	GameManager.event.combat_round_start.connect(_on_round_end)
 

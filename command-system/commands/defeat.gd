@@ -8,5 +8,5 @@ func _init( defeated_actor : CombatActor ):
 
 func execute():
 	#target.active = false
-	GameManager.event.combatant_dead.emit(target)
 	print("%s has been defeated." % target.name)
+	GameManager.event.combatant_dead.emit(target)

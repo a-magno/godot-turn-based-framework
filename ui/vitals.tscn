@@ -16,24 +16,22 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [node name="Vitals" type="VBoxContainer"]
-offset_left = -112.0
-offset_top = -32.0
-offset_right = 112.0
-offset_bottom = 52.0
+offset_right = 162.0
+offset_bottom = 87.0
 script = ExtResource("1_wrqut")
 
 [node name="Name" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_vertical = 0
 theme_override_constants/outline_size = 8
 text = "Name"
 horizontal_alignment = 1
 
 [node name="Healthbar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-size_flags_vertical = 3
 theme_override_styles/fill = SubResource("StyleBoxFlat_xihkb")
 value = 50.0
 show_percentage = false
@@ -53,3 +51,4 @@ horizontal_alignment = 1
 [node name="StatusContainer" parent="." instance=ExtResource("2_8gjgu")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 2

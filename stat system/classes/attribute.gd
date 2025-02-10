@@ -1,7 +1,7 @@
 extends Resource
 class_name Attribute
 
-signal attribute_changed( attrib : Attribute )
+signal value_changed( value : float )
 
 @export var id : StringName
 @export var target_stat : StringName
@@ -11,11 +11,14 @@ var stat : Stat :
 		stat = s
 		if stat == null: return
 		max_value = stat.value
-		value == max_value
+		value = max_value
 		stat.stat_changed.connect(_on_max_stat_changed)
 
 # Internal value
-var value : float
+var value : float :
+	set(v):
+		value = v
+		value_changed.emit(value)
 # Determines current value
 #var current_value : Stat = Stat.new(id, stat.value):
 	#set(v):
