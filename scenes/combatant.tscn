@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://status-effects-skills/classes/status_handler.gd" id="6_i344d"]
 [ext_resource type="Script" path="res://stat system/classes/attribute_container.gd" id="7_6ebhh"]
 [ext_resource type="Script" path="res://stat system/classes/attribute.gd" id="8_essbq"]
-[ext_resource type="Resource" uid="uid://cvh0q3mtng18m" path="res://stat system/attributes/health.tres" id="9_gxpmf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8636n"]
 resource_local_to_scene = true
@@ -26,6 +25,14 @@ region = Rect2(33.3224, 37.2232, 117.355, 118.182)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bfeaa"]
 radius = 40.0
+
+[sub_resource type="Resource" id="Resource_xltkx"]
+resource_local_to_scene = true
+script = ExtResource("8_essbq")
+id = &"health"
+target_stat = &"max_health"
+min_value = 0.0
+formula = ""
 
 [node name="Combatant" type="Node2D" node_paths=PackedStringArray("status_handler", "attribute_container")]
 script = ExtResource("1_ecchv")
@@ -78,7 +85,7 @@ base_stats = {
 "will": 10.0,
 "wit": 10.0
 }
-attributes = Array[ExtResource("8_essbq")]([ExtResource("9_gxpmf")])
+attributes = Array[ExtResource("8_essbq")]([SubResource("Resource_xltkx")])
 
 [connection signal="health_changed" from="." to="Area2D" method="_on_combatant_health_changed"]
 

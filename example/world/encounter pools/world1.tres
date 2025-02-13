@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EncounterPool" load_steps=6 format=3 uid="uid://c7noyobn3fq4m"]
+
+[ext_resource type="Script" path="res://stats/classes/character_stats.gd" id="1_kf8a2"]
+[ext_resource type="Script" path="res://status-effects-skills/classes/skill.gd" id="2_mgyfi"]
+[ext_resource type="Script" path="res://encounter_system/encounter_pool.gd" id="3_6u7xh"]
+
+[sub_resource type="Resource" id="Resource_fb6x7"]
+script = ExtResource("1_kf8a2")
+id = &"strong enemy"
+is_player = false
+max_health = 50
+attack = 5
+speed = 1
+skills = Array[ExtResource("2_mgyfi")]([])
+
+[sub_resource type="Resource" id="Resource_lyn7d"]
+script = ExtResource("1_kf8a2")
+id = &"weak enemy"
+is_player = false
+max_health = 15
+attack = 2
+speed = 1
+skills = Array[ExtResource("2_mgyfi")]([])
+
+[resource]
+script = ExtResource("3_6u7xh")
+id = &"grass"
+available_enemies = {
+0.1: SubResource("Resource_fb6x7"),
+1.0: SubResource("Resource_lyn7d")
+}

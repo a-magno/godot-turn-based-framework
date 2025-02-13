@@ -2,8 +2,27 @@ extends Node
 class_name EncounterManager
 
 @export var battle_scene : PackedScene
-@export var encounter_pool : Array
-@export var encounter_in : int = 100 # steps
+@export var encounter_pools : Array[EncounterPool]
+var _pools : Dictionary = {}
+@export var max_enemies : int = 3
+@export var encounter_steps : int = 100 # steps
 
-func generate_encounter():
-	pass
+static var current_enemies : Array[Stats]
+
+var rng := RandomNumberGenerator.new()
+
+func _ready()->void:
+	for p in encounter_pools:
+		_pools.merge( { p.id : p } )
+
+func generate_encounter( id : StringName ):
+	var pool : EncounterPool = _pools.get(id, null)
+	if not pool:
+		print("No encounter pool available in %s" % id)
+		return
+	
+	for i in range(max_enemies):
+		var new_enemy : Stats = pool.pick_enemy()
+		print(new_enemy.id)
+		current_enemies.push_back( new_enemy )
+		

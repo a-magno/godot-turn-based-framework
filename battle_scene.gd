@@ -4,9 +4,14 @@ const COMBATANT = preload("res://scenes/combatant.tscn")
 @export var test_stats : Array[Stats]
 
 @onready var positions = [
-	%Marker2D.position,
-	%Marker2D2.position,
-	%Marker2D3.position]
+	Vector2(190, 170),
+	Vector2(470, 130),
+	Vector2(470, 240),
+	Vector2(580, 20),
+	Vector2(580, 130),
+	Vector2(580, 235),
+	Vector2(580, 345),
+	]
 
 var active : bool = true
 var _round_counter : int = 0 :
@@ -16,6 +21,8 @@ var _round_counter : int = 0 :
 			print_rich("\n[b]Round %d" % _round_counter)
 
 func _ready() -> void:
+	test_stats.append_array( EncounterManager.current_enemies )
+	
 	GameManager.event.combatant_dead.connect(_on_actor_death)
 	
 	for stat in test_stats:

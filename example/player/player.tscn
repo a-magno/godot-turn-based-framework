@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://u3wgjkiwp3n2"]
+
+[ext_resource type="Texture2D" uid="uid://rupsj1d8wims" path="res://icon.svg" id="1_q8pfw"]
+[ext_resource type="Script" path="res://example/player/player.gd" id="1_y8oel"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_y8oel")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_q8pfw")
+centered = false
+
+[node name="InTile" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 138.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Stepping in: Poop"
+horizontal_alignment = 1
+vertical_alignment = 1
