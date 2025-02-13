@@ -6,7 +6,7 @@ signal active_changed( actor : CombatActor, is_active : bool )
 signal turn_started( actor : CombatActor )
 signal turn_ended( actor : CombatActor )
 
-@export var active : bool = true :
+@export var active : bool = false :
 	set = set_active
 
 var acted : bool = false

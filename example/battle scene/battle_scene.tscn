@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://b83hqummjkavk"]
+
+[ext_resource type="Script" path="res://example/battle scene/battle_scene.gd" id="1_r5l0u"]
+[ext_resource type="Script" path="res://turn-based-combat/TurnManager.gd" id="2_5g7vw"]
+[ext_resource type="Script" path="res://stats/classes/character_stats.gd" id="2_sl17i"]
+[ext_resource type="Script" path="res://command-system/CommandQueue.gd" id="3_5g7vw"]
+[ext_resource type="Resource" uid="uid://d1lmr2crcfi1w" path="res://stats/resources/player.tres" id="3_x5h4l"]
+[ext_resource type="Script" path="res://example/battle scene/ai/enemy_ai.gd" id="7_vtmj2"]
+[ext_resource type="PackedScene" uid="uid://dogm08wo1wqu1" path="res://example/ui/player ui/player_input_ui.tscn" id="7_x5h4l"]
+
+[node name="BattleScene" type="Node2D"]
+position = Vector2(320, 192)
+script = ExtResource("1_r5l0u")
+test_stats = Array[ExtResource("2_sl17i")]([ExtResource("3_x5h4l")])
+
+[node name="TurnManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_5g7vw")
+metadata/_custom_type_script = ExtResource("2_5g7vw")
+
+[node name="CommandQueue" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_5g7vw")
+
+[node name="play_round" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = 11.0
+offset_top = 42.0
+offset_right = 106.0
+offset_bottom = 73.0
+text = "Play Round"
+
+[node name="EnemyAI" type="Node" parent="."]
+process_priority = 1
+script = ExtResource("7_vtmj2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerInput UI" parent="CanvasLayer" instance=ExtResource("7_x5h4l")]
+anchors_preset = 12
+anchor_top = 1.0
+grow_vertical = 0
+
+[node name="RoundCounter" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 36
+text = "Round 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="active_actor_changed" from="TurnManager" to="EnemyAI" method="_on_actor_active_changed"]
+[connection signal="active_actor_changed" from="TurnManager" to="CanvasLayer/PlayerInput UI" method="_set_player"]
+[connection signal="get_commands" from="CommandQueue" to="TurnManager" method="play_turns"]

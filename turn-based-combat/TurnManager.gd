@@ -11,7 +11,7 @@ signal active_actor_changed( actor : CombatActor )
 signal round_start()
 signal round_end()
 
-static var NAME_DIFFERENTIATORS = ["A", "B", "C"]
+static var NAME_DIFFERENTIATORS = ["A", "B", "C", "D", "E", "F"]
 
 ## Enables or disables internal looping.
 ## Good if your plan is to control the turn order externally.
@@ -48,15 +48,11 @@ func play_turns()->void:
 			_sort_actors()
 		#current actor's turn
 		current_actor = actor
-		
 		# turn start
 		current_actor.turn_start()
 		
-		#print("Waiting for %s action..." % current_actor.name)
 		await current_actor.turn_ended
-		#print("%s turn ended." % current_actor.name)
 		#turn end
-	
 	#end of round
 	round_end.emit()
 

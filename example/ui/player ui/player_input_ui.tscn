@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3 uid="uid://dogm08wo1wqu1"]
+
+[ext_resource type="Script" path="res://example/ui/player ui/player_input_ui.gd" id="1_ydq07"]
+
+[node name="PlayerInput UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ydq07")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Actions" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Attack" type="Button" parent="PanelContainer/MarginContainer/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Attack"
+
+[node name="Skill" type="Button" parent="PanelContainer/MarginContainer/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Skill"
+
+[node name="Skip" type="Button" parent="PanelContainer/MarginContainer/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Skip"
+
+[node name="Skills" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="PrevMenu" type="Button" parent="PanelContainer/MarginContainer/Skills"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "<- Back"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Skills"]
+layout_mode = 2
+
+[node name="SkillsList" type="HBoxContainer" parent="PanelContainer/MarginContainer/Skills"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/Skills/SkillsList"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Move"
+
+[node name="Button2" type="Button" parent="PanelContainer/MarginContainer/Skills/SkillsList"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Move"
+
+[node name="Button3" type="Button" parent="PanelContainer/MarginContainer/Skills/SkillsList"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Move"
+
+[node name="Button4" type="Button" parent="PanelContainer/MarginContainer/Skills/SkillsList"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Move"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/Actions/Skip" to="." method="_on_skip_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Skills/PrevMenu" to="." method="_on_prev_menu_pressed"]

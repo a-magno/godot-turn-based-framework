@@ -16,13 +16,14 @@ func _ready()->void:
 		_pools.merge( { p.id : p } )
 
 func generate_encounter( id : StringName ):
+	var number_to_generate = randi_range(1, max_enemies)
 	var pool : EncounterPool = _pools.get(id, null)
 	if not pool:
 		print("No encounter pool available in %s" % id)
-		return
+		return false
 	
-	for i in range(max_enemies):
+	for i in range(number_to_generate):
 		var new_enemy : Stats = pool.pick_enemy()
 		print(new_enemy.id)
 		current_enemies.push_back( new_enemy )
-		
+	return true

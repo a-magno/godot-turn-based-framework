@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://6po8lrdu21ds"]
+
+[ext_resource type="Script" path="res://example/ui/status_container.gd" id="1_bvtra"]
+
+[node name="StatusContainerUI" type="GridContainer"]
+theme_override_constants/h_separation = -6
+columns = 6
+script = ExtResource("1_bvtra")

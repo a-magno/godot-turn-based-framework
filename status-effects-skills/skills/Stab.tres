@@ -20,6 +20,7 @@ func apply_effects(_targets : Array[Node])->void:
 		_caster.queue_command( 
 			AttackCommand.new( target )
 			.set_attacker(_caster)
+			.set_priority( Command.Priority.HIGH )
 			.modify_damage(bonus_damage) 
 		)
 "
@@ -32,4 +33,4 @@ id = &"stab"
 cost = 0
 target = 1
 icon = SubResource("AtlasTexture_l51nc")
-tooltip = ""
+tooltip = "Stab a target. Inflicts Bleeding."

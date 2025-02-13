@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8rws27uhlujk"]
-
-[ext_resource type="Script" path="res://turn-based-combat/TurnManager.gd" id="1_ia1lp"]
-
-[node name="TurnManager" type="Node"]
-script = ExtResource("1_ia1lp")
-sorting_property = &"speed"

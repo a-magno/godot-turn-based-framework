@@ -1,6 +1,11 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://csp61myybocek"]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://csp61myybocek"]
 
+[ext_resource type="Texture2D" uid="uid://dsfs46axphtkk" path="res://assets/#2 - Transparent Icons & Drop Shadow.png" id="1_ilsrt"]
 [ext_resource type="Script" path="res://status-effects-skills/classes/skill.gd" id="1_k6uep"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nirnt"]
+atlas = ExtResource("1_ilsrt")
+region = Rect2(352, 96, 32, 32)
 
 [sub_resource type="GDScript" id="GDScript_k6uep"]
 script/source = "extends Skill
@@ -18,9 +23,10 @@ func apply_effects(_targets : Array[Node])->void:
 
 [resource]
 script = SubResource("GDScript_k6uep")
-damage_bonus = 20
+damage_bonus = 40
 id = &"bash"
 cost = 0
 target = 1
-tooltip = ""
+icon = SubResource("AtlasTexture_nirnt")
+tooltip = "Hit enemies really hard!"
 metadata/_custom_type_script = ExtResource("1_k6uep")
