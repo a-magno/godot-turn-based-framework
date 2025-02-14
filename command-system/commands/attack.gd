@@ -10,7 +10,7 @@ func _init( _target : Combatant )->void:
 
 func execute():
 	if not is_instance_valid(target): return
-	if not attacker.is_alive(): return
+	if not attacker: return
 	print("%s is attacking %s" % [attacker.name, target.name])
 	#print("\n%s attacked %s for %d damage!\n" % [attacker.name, target.name, damage])
 	var dmg_effect = DamageEffect.new( damage )
@@ -29,3 +29,6 @@ func set_attacker( a : CombatActor )->AttackCommand:
 func set_damage( d : int )->AttackCommand:
 	damage = d
 	return self
+
+func get_class_name()->String:
+	return "AttackCommand"

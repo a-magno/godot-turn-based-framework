@@ -42,6 +42,10 @@ func _ready() -> void:
 
 	begin_combat()
 
+func _process(delta: float) -> void:
+	%CommandStack.text = "Stack: %s" % str($CommandQueue.get_commands())
+	%TurnStack.text = "Current Actor: %s" % $TurnManager.current_actor.name if is_instance_valid($TurnManager.current_actor) else ""
+
 func begin_combat():
 	print_rich("[b]Combat begins!")
 	while active:
@@ -50,16 +54,19 @@ func begin_combat():
 		_round_counter += 1
 		await %TurnManager.play_turns()
 		await %CommandQueue.execute_all()
-		GameManager.event.combat_round_end.emit()
 		_check_groups(0)
+		GameManager.event.combat_round_end.emit()
 
 func end_combat(player_win : bool):
 	print_rich("\n[b]Ending combat...")
 	active = false
 	%TurnManager.reset()
 	%CommandQueue.clear()
+	EncounterManager.current_enemies.clear()
 	if player_win:
 		print("Player win")
+		await get_tree().create_timer(0.5).timeout
+		get_tree().change_scene_to_file("res://example/world/world.tscn")
 	else:
 		print("Enemy win")
 

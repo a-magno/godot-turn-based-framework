@@ -15,3 +15,6 @@ func execute()->void:
 func set_priority( value : float )->Command:
 	priority = value
 	return self
+
+func get_class_name():
+	return ""
