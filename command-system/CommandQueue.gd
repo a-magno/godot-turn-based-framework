@@ -40,9 +40,7 @@ func command_queued( command : Command )->void:
 	#print_debug("Command queued.")
 	active = false
 	command_stack.push_front( command )
-	print_debug(get_commands())
 	command_stack.sort_custom(_sort_highest_priority)
-	print_debug(get_commands())
 	active = true
 	
 	if _was_executing:

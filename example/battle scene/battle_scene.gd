@@ -50,12 +50,20 @@ func begin_combat():
 	print_rich("[b]Combat begins!")
 	while active:
 		#await %play_round.pressed
-		GameManager.event.combat_round_start.emit()
 		_round_counter += 1
+		GameManager.event.combat_round_start.emit()
+		print("Getting turn actions...")
 		await %TurnManager.play_turns()
+		
+		print("Checking groups...")
+		await _check_groups(0)
+		
+		print("Executing actions...")
 		await %CommandQueue.execute_all()
-		_check_groups(0)
+		
 		GameManager.event.combat_round_end.emit()
+		print("Checking groups...")
+		await _check_groups(0)
 
 func end_combat(player_win : bool):
 	print_rich("\n[b]Ending combat...")
@@ -82,6 +90,7 @@ func _check_groups(_c):
 		
 func _on_actor_death( actor : CombatActor )->void:
 	%TurnManager.remove_from_queue(actor)
+	#actor.action_queued.disconnect(%CommandQueue.command_queued)
 
 func _add_to_combat( actor : CombatActor, group : StringName ):
 	%TurnManager.add_to_queue(actor, group)

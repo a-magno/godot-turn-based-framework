@@ -2,7 +2,7 @@ extends CombatActor
 class_name Combatant
 
 signal action_queued( command : Command )
-
+signal vitals_updated()
 signal health_changed(new_value)
 
 #@export var target_group : StringName = GameManager.GROUPS.PLAYERS.id
@@ -62,9 +62,7 @@ func turn_end()->void:
 	super()
 
 func queue_command( command : Command )->void:
-	if acted or not alive():
-		turn_end()
-		return
+	if acted: return
 	action_queued.emit(command)
 	turn_end()
 	#print(">%s queued command type: %s" % [name, command.get_class_name()])
@@ -82,7 +80,9 @@ func alive()->bool:
 	return health > 0
 
 func die()->void:
-	action_queued.emit( Defeated.new( self ).set_priority(Defeated.Priority.HIGH) )
+	#action_queued.emit( Defeated.new( self ).set_priority(Defeated.Priority.HIGH) )
+	await vitals_updated
+	Defeated.new( self ).execute()
 	set_active(false)
 	#Death.new().execute([self])
 
@@ -91,6 +91,8 @@ func print_stats():
 
 
 func _on_round_start()->void:
+	if not alive():
+		die()
 	status_handler.apply_status_by_type( Status.Type.TURN_START )
 
 func _on_round_end()->void:
