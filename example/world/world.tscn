@@ -46,7 +46,7 @@ script = ExtResource("2_t2xkb")
 battle_scene = ExtResource("3_3q65w")
 encounter_pools = Array[ExtResource("8_3bhub")]([ExtResource("7_yjwof")])
 max_enemies = 2
-encounter_steps = 10
+encounter_steps = 5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

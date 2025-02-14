@@ -27,6 +27,7 @@ var current_actor : CombatActor = null :
 	set(c):
 		current_actor = c
 		if current_actor == null: return
+		print(">Current Actor: %s" % current_actor.name)
 		active_actor_changed.emit( current_actor )
 
 var _actors_sorted : bool = false
@@ -79,10 +80,10 @@ func add_to_queue( actor : CombatActor, group : StringName )->void:
 	return
 
 func remove_from_queue( actor : CombatActor )->void:
-	assert( actor.is_inside_tree(), "%s is not inside tree." % actor.name )
-	actor.remove_from_group( actor.get_meta("group") )
 	assert( _combat_actors.has( actor ), "%s is not a part of the turn queue." % actor.name)
 	_combat_actors.erase( actor )
+	assert( actor.is_inside_tree(), "%s is not inside tree." % actor.name )
+	actor.remove_from_group( actor.get_meta("group") )
 	actor.queue_free()
 	_actors_sorted = false
 

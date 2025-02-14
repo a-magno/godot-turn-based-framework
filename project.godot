@@ -15,10 +15,6 @@ run/main_scene="res://example/world/world.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
-
-SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
-
 [dotnet]
 
 project/assembly_name="TurnBasedEngine"
@@ -26,10 +22,6 @@ project/assembly_name="TurnBasedEngine"
 [editor]
 
 movie_writer/movie_file="C:/Users/alexandre.magno/Documents/Godot/Projects/godot-turn-based-framework/recs/rec.avi"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/signal_lens/plugin.cfg")
 
 [rendering]
 

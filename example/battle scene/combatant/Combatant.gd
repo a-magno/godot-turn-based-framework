@@ -52,28 +52,39 @@ func _ready() -> void:
 	GameManager.event.combat_round_start.connect(_on_round_end)
 
 func set_active( _a : bool ):
-	if health <= 0:
-		return
+	if not alive(): return
 	super(_a)
 
+func turn_start()->void:
+	super()
+
+func turn_end()->void:
+	super()
 
 func queue_command( command : Command )->void:
-	if acted: return
+	if acted or not alive():
+		turn_end()
+		return
 	action_queued.emit(command)
+	turn_end()
+	#print(">%s queued command type: %s" % [name, command.get_class_name()])
 	#acted = true
 	#print("Command queued")
-	turn_end()
+	#print("%s turn ended." % name)
 
 
 func take_damage( amount : int ):
 	health -= amount
-	if not is_alive():
-		queue_command( Defeated.new( self ).set_priority(Defeated.Priority.HIGH) )
-		set_active(false)
+	if not alive():
+		die()
 
-func is_alive()->bool:
-	return not health <= 0
+func alive()->bool:
+	return health > 0
 
+func die()->void:
+	action_queued.emit( Defeated.new( self ).set_priority(Defeated.Priority.HIGH) )
+	set_active(false)
+	#Death.new().execute([self])
 
 func print_stats():
 	print("\nName: %s\nMax HP: %d\nDamage: %d\nSpeed: %d\n" % [name, max_health, damage, speed])
@@ -83,5 +94,7 @@ func _on_round_start()->void:
 	status_handler.apply_status_by_type( Status.Type.TURN_START )
 
 func _on_round_end()->void:
+	if not alive():
+		die()
 	status_handler.apply_status_by_type( Status.Type.TURN_END )
 # EOF #
