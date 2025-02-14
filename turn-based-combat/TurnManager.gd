@@ -45,6 +45,7 @@ func play_turns()->void:
 	
 	for actor : CombatActor in _combat_actors:
 		if not _can_act( actor ): continue
+		if not actor: continue
 		if not _actors_sorted and len(sorting_property) > 0:
 			_sort_actors()
 		#current actor's turn
@@ -58,7 +59,7 @@ func play_turns()->void:
 	round_end.emit()
 
 func _can_act( actor : CombatActor )->bool:
-	return is_instance_valid(actor) and actor.is_inside_tree()
+	return is_instance_valid(actor) and actor.is_inside_tree() and actor.active
 
 ## Clears the TurnManager and resets it's values.
 func reset()->void:

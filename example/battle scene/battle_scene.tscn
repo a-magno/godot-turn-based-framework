@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b83hqummjkavk"]
+[gd_scene load_steps=9 format=3 uid="uid://b83hqummjkavk"]
 
 [ext_resource type="Script" path="res://example/battle scene/battle_scene.gd" id="1_r5l0u"]
 [ext_resource type="Script" path="res://turn-based-combat/TurnManager.gd" id="2_5g7vw"]
 [ext_resource type="Script" path="res://stats/classes/character_stats.gd" id="2_sl17i"]
 [ext_resource type="Script" path="res://command-system/CommandQueue.gd" id="3_5g7vw"]
 [ext_resource type="Resource" uid="uid://d1lmr2crcfi1w" path="res://stats/resources/player.tres" id="3_x5h4l"]
+[ext_resource type="Texture2D" uid="uid://co1mpohsbcpuw" path="res://assets/backgrounds/grass.png" id="4_57vh7"]
 [ext_resource type="Script" path="res://example/battle scene/ai/enemy_ai.gd" id="7_vtmj2"]
 [ext_resource type="PackedScene" uid="uid://dogm08wo1wqu1" path="res://example/ui/player ui/player_input_ui.tscn" id="7_x5h4l"]
 
@@ -12,6 +13,14 @@
 position = Vector2(320, 192)
 script = ExtResource("1_r5l0u")
 test_stats = Array[ExtResource("2_sl17i")]([ExtResource("3_x5h4l")])
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_57vh7")
 
 [node name="TurnManager" type="Node" parent="."]
 unique_name_in_owner = true

@@ -20,6 +20,8 @@ func _on_health_changed(value)->void:
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property(%Healthbar, "value", value, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_method(_update_label.bind(%Healthbar.max_value), %Healthbar.value, value, 0.3)
+	await tween.finished
+	combatant.vitals_updated.emit()
 
 func _update_label(value, max_value)->void:
 	%HealthLabel.text = "%d / %d" % [clamp(value, 0, max_value), max_value]

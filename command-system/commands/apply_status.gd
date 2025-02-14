@@ -10,4 +10,5 @@ func _init( _status : Status, _target : StatusHandler )->void:
 	priority = PRIORITIES[Priority.HIGH]
 
 func execute()->void:
+	if not target: return
 	target.add_status( status )

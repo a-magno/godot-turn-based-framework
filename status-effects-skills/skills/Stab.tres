@@ -27,7 +27,7 @@ func apply_effects(_targets : Array[Node])->void:
 
 [resource]
 script = SubResource("GDScript_tdifo")
-bonus_damage = 0
+bonus_damage = 30
 status = ExtResource("2_xkyjc")
 id = &"stab"
 cost = 0

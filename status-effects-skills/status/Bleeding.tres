@@ -13,16 +13,17 @@ var bleed_percent := 0.05
 
 func apply(target : Node)->void:
 	if not target is Combatant: return
-	target.health -= target.max_health * bleed_percent
+	#print(\"expected bleed damage: %.1f\" % (target.max_health * bleed_percent))
+	target.take_damage( ceil(target.max_health * bleed_percent) )
 	duration -= 1
 "
 
 [resource]
 script = SubResource("GDScript_4lr5q")
 id = &"bleeding"
-duration = 3
+duration = 5
 max_stacks = 1
-type = 1
+type = 0
 stack_type = 2
 icon = SubResource("AtlasTexture_g0jym")
 tooltip = ""
