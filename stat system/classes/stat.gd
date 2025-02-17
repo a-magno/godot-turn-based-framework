@@ -1,11 +1,11 @@
-extends RefCounted
+extends Resource
 class_name Stat
 
 signal stat_changed( stat : Stat )
 
-var id : StringName
-var _base_value : float
-
+@export var id : StringName
+@export var _base_value : float
+@export var hidden : bool = false # Whether or not its hidden from UI elements
 var _add : float = 0 :
 	set(v):
 		_add = v
@@ -16,22 +16,20 @@ var _mult : float = 0 :
 		calculate()
 var value : float :
 	get(): 
-		#calculate()
-		return value
+		return calculate()
 	set(v):
 		value = v
 		stat_changed.emit(self)
 
 var _mod_stack : Dictionary
 
-func _init( _id : StringName, _b : float )->void:
-	id = _id
-	_base_value = _b
+func _init()->void:
+	#id = _id
+	#_base_value = _b
 	calculate()
 
 func calculate()->float:
-	value = (_base_value + _add) * (1.0 + _mult)
-	return value
+	return (_base_value + _add) * (1.0 + _mult)
 
 func apply_modifier( mod : StatModifier )->void:
 	if not _mod_stack.has( mod.id ):

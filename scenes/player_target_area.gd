@@ -30,4 +30,5 @@ func _on_combatant_health_changed(new_value: Variant) -> void:
 		input_pickable = true
 
 func _is_player()->bool:
-	return get_parent().stats.is_player
+	if not get_parent().has_meta("group"): return false
+	return get_parent().get_meta("group") == GameManager.GROUPS.PLAYERS.id

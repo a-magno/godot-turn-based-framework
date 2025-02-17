@@ -1,7 +1,6 @@
 extends Control
 
 @export var actor : Combatant
-@onready var attrib_container = actor.attribute_container 
 
 func _ready()->void:
 	hide()
@@ -10,17 +9,18 @@ func _process(delta: float) -> void:
 	for c in %StatsContainer.get_children():
 		c.queue_free()
 	
-	var stats = attrib_container.get_stats()
-	var attribs = attrib_container.get_attributes()
+	var stats = actor.stat_block.stats
+	var attribs = actor.stat_block.attributes
 	
-	for a : Attribute in attribs:
+	for a : Attribute in attribs.values():
 		var lbl := Label.new()
-		lbl.text = "%s : %.1f / %.1f" % [a.id.capitalize(), a.value, a.max_value ]
+		lbl.text = "%s : %.1f / %.1f" % [a.id.capitalize(), a.current_value, a.max_value ]
 		%StatsContainer.add_child( lbl )
 	
 	%StatsContainer.add_child( HSeparator.new() )
 	
-	for stat in stats:
+	for stat : Stat in stats.values():
+		if stat.hidden: continue
 		var lbl := Label.new()
-		lbl.text = "%s : %d" % [stat.id.capitalize(), stat.value]
+		lbl.text = "%s : %.1f" % [stat.id.capitalize(), stat.value]
 		%StatsContainer.add_child( lbl )
