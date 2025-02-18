@@ -1,41 +1,49 @@
-[gd_resource type="Resource" script_class="StatBlock" load_steps=8 format=3 uid="uid://xgpdqk5pbupb"]
+[gd_resource type="Resource" script_class="StatBlock" load_steps=10 format=3 uid="uid://xgpdqk5pbupb"]
 
-[ext_resource type="Script" path="res://stat system/classes/attribute.gd" id="1_8qcyd"]
+[ext_resource type="Script" path="res://stat system/classes/attribute.gd" id="1_4q8jm"]
 [ext_resource type="Script" path="res://stat system/classes/stat_block.gd" id="2_vgq25"]
 [ext_resource type="Script" path="res://stat system/classes/stat.gd" id="3_llimk"]
 
-[sub_resource type="Resource" id="Resource_i8w14"]
-script = ExtResource("1_8qcyd")
+[sub_resource type="Resource" id="Resource_126jo"]
+script = ExtResource("1_4q8jm")
 id = &"health"
 target_stat = &"maxHealth"
 recalculation = 0
 min_value = 0.0
 
-[sub_resource type="Resource" id="Resource_bsljo"]
+[sub_resource type="Resource" id="Resource_1l8c3"]
+script = ExtResource("1_4q8jm")
+id = &"ap"
+target_stat = &"maxAp"
+recalculation = 1
+min_value = 0.0
+
+[sub_resource type="Resource" id="Resource_ljmtn"]
+script = ExtResource("3_llimk")
+id = &"maxHealth"
+_base_value = 25.0
+hidden = true
+
+[sub_resource type="Resource" id="Resource_u4pqj"]
+script = ExtResource("3_llimk")
+id = &"atkPow"
+_base_value = 10.0
+hidden = false
+
+[sub_resource type="Resource" id="Resource_18liu"]
 script = ExtResource("3_llimk")
 id = &"armor"
 _base_value = 5.0
 hidden = false
 
-[sub_resource type="Resource" id="Resource_vbl0b"]
+[sub_resource type="Resource" id="Resource_l3e7a"]
 script = ExtResource("3_llimk")
-id = &"atkPow"
-_base_value = 5.0
-hidden = false
-
-[sub_resource type="Resource" id="Resource_phv16"]
-script = ExtResource("3_llimk")
-id = &"maxHealth"
-_base_value = 50.0
+id = &"maxAp"
+_base_value = 1.0
 hidden = true
 
 [resource]
 script = ExtResource("2_vgq25")
-stats = {
-"armor": SubResource("Resource_bsljo"),
-"atkPow": SubResource("Resource_vbl0b"),
-"maxHealth": SubResource("Resource_phv16")
-}
-attributes = {
-"health": SubResource("Resource_i8w14")
-}
+name = "Enemy"
+base_stats = Array[ExtResource("3_llimk")]([SubResource("Resource_ljmtn"), SubResource("Resource_u4pqj"), SubResource("Resource_18liu"), SubResource("Resource_l3e7a")])
+base_attributes = Array[ExtResource("1_4q8jm")]([SubResource("Resource_126jo"), SubResource("Resource_1l8c3")])

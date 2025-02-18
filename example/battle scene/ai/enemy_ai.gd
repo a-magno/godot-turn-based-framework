@@ -20,4 +20,4 @@ func _attack()->void:
 		var player = get_tree().get_first_node_in_group(GameManager.GROUPS.PLAYERS.id)
 		set_physics_process(false)
 		print("Turning off EnemyAI Process...\n")
-		active_enemy.queue_command( AttackCommand.new( player ).set_attacker(active_enemy) )
+		active_enemy.attack( player )

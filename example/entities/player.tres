@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Entity" load_steps=8 format=3 uid="uid://bak3pptei7l38"]
+
+[ext_resource type="Script" path="res://example/entity.gd" id="1_dkk4s"]
+[ext_resource type="Script" path="res://status-effects-skills/classes/skill.gd" id="2_2t4nt"]
+[ext_resource type="Resource" uid="uid://csp61myybocek" path="res://status-effects-skills/skills/Bash.tres" id="3_aka2u"]
+[ext_resource type="Resource" uid="uid://drvncmm5d8k8d" path="res://status-effects-skills/skills/Stab.tres" id="4_rey1d"]
+[ext_resource type="Texture2D" uid="uid://mcb6v6850rv0" path="res://assets/Pouch/Pouch.png" id="5_tqsky"]
+[ext_resource type="Resource" uid="uid://dxnvu1m370jb4" path="res://stat system/player.tres" id="6_yv0sg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3i8c2"]
+atlas = ExtResource("5_tqsky")
+region = Rect2(32, 32, 128, 128)
+
+[resource]
+script = ExtResource("1_dkk4s")
+name = "Player"
+stat_block = ExtResource("6_yv0sg")
+skills = Array[ExtResource("2_2t4nt")]([ExtResource("3_aka2u"), ExtResource("4_rey1d")])
+inventory = []
+sprite = SubResource("AtlasTexture_3i8c2")

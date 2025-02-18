@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="StatBlock" load_steps=10 format=3 uid="uid://dxnvu1m370jb4"]
+
+[ext_resource type="Script" path="res://stat system/classes/attribute.gd" id="1_eeque"]
+[ext_resource type="Script" path="res://stat system/classes/stat.gd" id="2_kgxci"]
+[ext_resource type="Script" path="res://stat system/classes/stat_block.gd" id="3_lmupf"]
+
+[sub_resource type="Resource" id="Resource_126jo"]
+script = ExtResource("1_eeque")
+id = &"health"
+target_stat = &"maxHealth"
+recalculation = 0
+min_value = 0.0
+
+[sub_resource type="Resource" id="Resource_y47as"]
+script = ExtResource("1_eeque")
+id = &"ap"
+target_stat = &"maxAp"
+recalculation = 1
+min_value = 0.0
+
+[sub_resource type="Resource" id="Resource_ljmtn"]
+script = ExtResource("2_kgxci")
+id = &"maxHealth"
+_base_value = 50.0
+hidden = true
+
+[sub_resource type="Resource" id="Resource_u4pqj"]
+script = ExtResource("2_kgxci")
+id = &"atkPow"
+_base_value = 10.0
+hidden = false
+
+[sub_resource type="Resource" id="Resource_18liu"]
+script = ExtResource("2_kgxci")
+id = &"armor"
+_base_value = 5.0
+hidden = false
+
+[sub_resource type="Resource" id="Resource_cua65"]
+script = ExtResource("2_kgxci")
+id = &"maxAp"
+_base_value = 3.0
+hidden = true
+
+[resource]
+script = ExtResource("3_lmupf")
+name = "Player"
+base_stats = Array[ExtResource("2_kgxci")]([SubResource("Resource_ljmtn"), SubResource("Resource_u4pqj"), SubResource("Resource_18liu"), SubResource("Resource_cua65")])
+base_attributes = Array[ExtResource("1_eeque")]([SubResource("Resource_126jo"), SubResource("Resource_y47as")])

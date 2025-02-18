@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://tvu1ny4rsdew" path="res://assets/world.png" id="1_4ynhx"]
 [ext_resource type="Script" path="res://example/world/world.gd" id="1_c701h"]
 [ext_resource type="Script" path="res://encounter_system/EncounterManager.gd" id="2_t2xkb"]
-[ext_resource type="PackedScene" uid="uid://b83hqummjkavk" path="res://example/battle scene/battle_scene.tscn" id="3_3q65w"]
 [ext_resource type="PackedScene" uid="uid://u3wgjkiwp3n2" path="res://example/player/player.tscn" id="5_w7dxc"]
 [ext_resource type="Resource" uid="uid://c7noyobn3fq4m" path="res://example/world/encounter pools/world1.tres" id="7_yjwof"]
 [ext_resource type="Script" path="res://encounter_system/encounter_pool.gd" id="8_3bhub"]
@@ -43,7 +42,6 @@ position = Vector2(512, 320)
 
 [node name="EncounterManager" type="Node" parent="."]
 script = ExtResource("2_t2xkb")
-battle_scene = ExtResource("3_3q65w")
 encounter_pools = Array[ExtResource("8_3bhub")]([ExtResource("7_yjwof")])
 max_enemies = 2
 encounter_steps = 5

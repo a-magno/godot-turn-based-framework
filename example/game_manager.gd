@@ -20,3 +20,8 @@ class Events:
 	signal combat_round_end()
 
 static var event : Events = Events.new()
+
+static var player_stats : Entity = preload("res://example/entities/player.tres")
+
+#const OVERWORLD : PackedScene = preload("res://example/world/world.tscn")
+#const BATTLE_SCENE : PackedScene = preload("res://example/battle scene/battle_scene.tscn")

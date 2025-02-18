@@ -10,23 +10,21 @@ func _init( _target : Combatant )->void:
 
 func execute():
 	if not is_instance_valid(target): return
-	if not attacker: return
-	print("%s is attacking %s" % [attacker.name, target.name])
-	#print("\n%s attacked %s for %d damage!\n" % [attacker.name, target.name, damage])
+	if attacker:
+		print("%s is attacking %s" % [attacker.name, target.name])
 	var dmg_effect = DamageEffect.new( damage )
 	dmg_effect.execute([target])
-	#target.take_damage( damage )
 
 func modify_damage( value : int )->AttackCommand:
 	damage += value
 	return self
 
-func set_attacker( a : CombatActor )->AttackCommand:
+func by_attacker( a : CombatActor, set_dmg : bool = false )->AttackCommand:
 	attacker = a
-	set_damage( attacker.damage )
+	with_damage( attacker.stat_block.get_stat("atkPow").value )
 	return self
 
-func set_damage( d : int )->AttackCommand:
+func with_damage( d : int )->AttackCommand:
 	damage = d
 	return self
 

@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://bw5jmcfbmqouo"]
+[gd_scene load_steps=11 format=3 uid="uid://bw5jmcfbmqouo"]
 
 [ext_resource type="Script" path="res://example/battle scene/combatant/Combatant.gd" id="1_ecchv"]
-[ext_resource type="Resource" uid="uid://xgpdqk5pbupb" path="res://stat system/test_statblock.tres" id="2_5w8tf"]
 [ext_resource type="Shader" path="res://scenes/combatant.gdshader" id="2_bfeaa"]
 [ext_resource type="Texture2D" uid="uid://mcb6v6850rv0" path="res://assets/Pouch/Pouch.png" id="3_8636n"]
 [ext_resource type="PackedScene" uid="uid://dw7axib8xxycl" path="res://example/ui/vitals.tscn" id="3_bfeaa"]
@@ -28,7 +27,6 @@ radius = 40.0
 [node name="Combatant" type="Node2D" node_paths=PackedStringArray("status_handler")]
 script = ExtResource("1_ecchv")
 status_handler = NodePath("StatusHandler")
-stat_block = ExtResource("2_5w8tf")
 metadata/_custom_type_script = ExtResource("1_ecchv")
 
 [node name="Skin" type="Sprite2D" parent="."]

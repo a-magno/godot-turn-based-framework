@@ -7,13 +7,14 @@ var _pools : Dictionary = {}
 @export var max_enemies : int = 3
 @export var encounter_steps : int = 100 # steps
 
-static var current_enemies : Array[Stats]
+static var current_enemies : Array[Entity]
 
 var rng := RandomNumberGenerator.new()
 
 func _ready()->void:
 	for p in encounter_pools:
 		_pools.merge( { p.id : p } )
+		p.initialize()
 
 func generate_encounter( id : StringName ):
 	var number_to_generate = randi_range(1, max_enemies)
@@ -23,7 +24,7 @@ func generate_encounter( id : StringName ):
 		return false
 	
 	for i in range(number_to_generate):
-		var new_enemy : Stats = pool.pick_enemy()
-		print(new_enemy.id)
+		var new_enemy : Entity = pool.pick_enemy()
+		print(new_enemy.name)
 		current_enemies.push_back( new_enemy )
 	return true

@@ -69,20 +69,19 @@ func reset()->void:
 
 ## Adds a CombatActor to the actor stack.
 ## CombatActor must be activated externally.
-func add_to_queue( actor : CombatActor, group : StringName )->void:
+func add_to_queue( actor : CombatActor )->void:
 	if get_children().has( actor ):
 		push_warning("%s already in the list." % actor.name)
 		return
-	actor.add_to_group(group)
-	actor.set_meta("group", group)
 	round_start.connect(actor.set_active.bind(true))
 	add_child(actor)
+	_combat_actors.append( actor )
 	#actor.active_changed.connect(_on_actor_active_changed)
 	return
 
 func remove_from_queue( actor : CombatActor )->void:
-	assert( _combat_actors.has( actor ), "%s is not a part of the turn queue." % actor.name)
-	_combat_actors.erase( actor )
+	#assert( _combat_actors.has( actor ), "%s is not a part of the turn queue." % actor.name)
+	#_combat_actors.erase( actor )
 	assert( actor.is_inside_tree(), "%s is not inside tree." % actor.name )
 	actor.remove_from_group( actor.get_meta("group") )
 	actor.queue_free()
@@ -96,11 +95,6 @@ func _enter_tree() -> void:
 func _on_child_entered( _child : Node )->void:
 	if _child is CombatActor:
 		_actors_sorted = false
-
-func _on_actor_dead( actor : CombatActor ):
-	actor.remove_from_group( actor.get_meta("group") )
-	_combat_actors.erase(actor)
-	actor.queue_free()
 #endregion
 
 #region SORTING

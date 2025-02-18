@@ -16,7 +16,7 @@ func apply_effects(_targets : Array[Node])->void:
 	for target in _targets:
 		_caster.queue_command( 
 			AttackCommand.new( target )
-			.set_attacker(_caster)
+			.by_attacker(_caster)
 			.modify_damage(damage_bonus) 
 		)
 "

@@ -1,31 +1,21 @@
-[gd_resource type="Resource" script_class="EncounterPool" load_steps=6 format=3 uid="uid://c7noyobn3fq4m"]
+[gd_resource type="Resource" script_class="EncounterPool" load_steps=7 format=3 uid="uid://c7noyobn3fq4m"]
 
-[ext_resource type="Script" path="res://stats/classes/character_stats.gd" id="1_kf8a2"]
-[ext_resource type="Script" path="res://status-effects-skills/classes/skill.gd" id="2_mgyfi"]
+[ext_resource type="Script" path="res://encounter_system/encounter.gd" id="1_iycra"]
+[ext_resource type="Resource" uid="uid://b23f5xkolgiy4" path="res://example/entities/enemy.tres" id="2_ug01e"]
 [ext_resource type="Script" path="res://encounter_system/encounter_pool.gd" id="3_6u7xh"]
+[ext_resource type="Resource" uid="uid://cdvai7bmqi45l" path="res://example/entities/big_chungus.tres" id="3_ddv0o"]
 
-[sub_resource type="Resource" id="Resource_fb6x7"]
-script = ExtResource("1_kf8a2")
-id = &"strong enemy"
-is_player = false
-max_health = 50
-attack = 5
-speed = 1
-skills = Array[ExtResource("2_mgyfi")]([])
+[sub_resource type="Resource" id="Resource_f1jkb"]
+script = ExtResource("1_iycra")
+weight = 1.0
+enemy = ExtResource("2_ug01e")
 
-[sub_resource type="Resource" id="Resource_lyn7d"]
-script = ExtResource("1_kf8a2")
-id = &"weak enemy"
-is_player = false
-max_health = 15
-attack = 2
-speed = 1
-skills = Array[ExtResource("2_mgyfi")]([])
+[sub_resource type="Resource" id="Resource_hw178"]
+script = ExtResource("1_iycra")
+weight = 0.5
+enemy = ExtResource("3_ddv0o")
 
 [resource]
 script = ExtResource("3_6u7xh")
 id = &"grass"
-available_enemies = {
-0.1: SubResource("Resource_fb6x7"),
-1.0: SubResource("Resource_lyn7d")
-}
+available_encounters = Array[ExtResource("1_iycra")]([SubResource("Resource_f1jkb"), SubResource("Resource_hw178")])

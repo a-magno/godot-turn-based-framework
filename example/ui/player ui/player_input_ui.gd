@@ -35,7 +35,7 @@ func _on_attack_pressed()->void:
 	#print("Waiting for target selection...")
 	while target == null or target.is_in_group(GameManager.GROUPS.PLAYERS.id):
 		target = await GameManager.event.player_target_selected
-	player.queue_command( AttackCommand.new( target ).set_attacker( player ).modify_damage( randi_range(-2, 2) ) )
+	player.attack( target )
 
 func _on_skill_pressed()->void:
 	_active_tab = %Skills
@@ -59,7 +59,7 @@ func _on_active_changed( _actor, value )->void:
 func _set_skills():
 	for c in %SkillsList.get_children():
 		c.queue_free()
-	var skills =  player.stats.skills
+	var skills =  player.get_skills()
 	for skill in skills:
 		var btn = Button.new()
 		btn.text = skill.id.capitalize()

@@ -2,18 +2,26 @@
 extends Resource
 class_name StatBlock
 
-@export var stats : Dictionary
-@export var attributes : Dictionary
+@export var name : String
+@export var base_stats : Array[Stat]
+var stats : Dictionary = {}
+@export var base_attributes : Array[Attribute]
+var attributes : Dictionary = {}
 
-func _init()->void:
+func initialize()->void:
 	stats = {}
 	attributes = {}
+	for s in base_stats:
+		add_stat( s )
+	for a in base_attributes:
+		add_attribute( a )
+	calculate_attributes()
 
 #region Stat handling
 func add_stat( stat : Stat )->void:
 	stats.merge({ stat.id : stat.duplicate() })
 
-func get_stat( id : StringName )->Stat:
+func get_stat( id : StringName, as_object : bool = true )->Stat:
 	return stats.get( id, null )
 
 func get_stat_value( id : StringName )->float:

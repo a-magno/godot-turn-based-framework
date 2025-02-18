@@ -1,7 +1,7 @@
 extends Node2D
 
 const COMBATANT = preload("res://scenes/combatant.tscn")
-@export var test_stats : Array[Stats]
+@export var OVERWORLD : PackedScene
 
 @onready var positions = [
 	Vector2(190, 170),
@@ -21,24 +21,12 @@ var _round_counter : int = 0 :
 			%RoundCounter.text = "Round %d" % _round_counter
 
 func _ready() -> void:
-	test_stats.append_array( EncounterManager.current_enemies )
-	
 	GameManager.event.combatant_dead.connect(_on_actor_death)
-	
-	for stat in test_stats:
-		var combatant = COMBATANT.instantiate()
-		combatant.stats = stat
-		combatant.name = combatant.stats.id.capitalize()
-		
-		await _add_to_combat( combatant, 
-			GameManager.GROUPS.PLAYERS.id if stat.is_player else 
-			GameManager.GROUPS.ENEMIES.id)
-		
-		combatant.position = positions[0] if stat.is_player else positions.pop_at(1)
-
-		if %TurnManager.has_node("%s" % combatant.name) and combatant.is_in_group(GameManager.GROUPS.ENEMIES.id):
-			var letters = TurnManager.NAME_DIFFERENTIATORS
-			combatant.name += " %s" % letters.pop_front()
+	# Adding player first
+	add_to_combat( Combatant.new_player( GameManager.player_stats ) )
+	# Adding enemies
+	for enemy in EncounterManager.current_enemies:
+		add_to_combat( Combatant.new_enemy( enemy ) )
 
 	begin_combat()
 
@@ -60,7 +48,7 @@ func begin_combat():
 		
 		GameManager.event.combat_round_end.emit()
 		#print("Checking groups...")
-		await _check_groups()
+		#await _check_groups()
 
 func end_combat(player_win : bool):
 	print_rich("\n[b]Ending combat...")
@@ -71,10 +59,9 @@ func end_combat(player_win : bool):
 	if player_win:
 		print("Player win")
 		await get_tree().create_timer(0.5).timeout
-		get_tree().change_scene_to_file("res://example/world/world.tscn")
+		get_tree().change_scene_to_packed(OVERWORLD)
 	else:
 		print("Enemy win")
-
 
 func _check_groups():
 	#print("Checking groups...")
@@ -84,14 +71,22 @@ func _check_groups():
 	if enemy_count <= 0 or player_count <= 0:
 		end_combat( player_count > enemy_count )
 		return
-		
-func _on_actor_death( actor : CombatActor )->void:
-	%TurnManager.remove_from_queue(actor)
+
+func _on_actor_death( actor : Combatant )->void:
+	await %TurnManager.remove_from_queue(actor)
+	actor.queue_free()
 	_check_groups()
 	#actor.action_queued.disconnect(%CommandQueue.command_queued)
 
-func _add_to_combat( actor : CombatActor, group : StringName ):
-	%TurnManager.add_to_queue(actor, group)
+func add_to_combat( actor : Combatant ):
+	
+	actor.position = positions[0] if actor.is_player() else positions.pop_at(1)
+	if %TurnManager.has_node("%s" % actor.name) and not actor.is_player():
+		var letters = TurnManager.NAME_DIFFERENTIATORS
+		actor.name += " %s" % letters.pop_front()
+	actor.name.capitalize()
+	
+	%TurnManager.add_to_queue(actor)
 	actor.action_queued.connect(%CommandQueue.command_queued)
 	actor.set_active(true)
 	

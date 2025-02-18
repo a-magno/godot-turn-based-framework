@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Entity" load_steps=6 format=3 uid="uid://cdvai7bmqi45l"]
+
+[ext_resource type="Script" path="res://example/entity.gd" id="1_jqk7y"]
+[ext_resource type="Script" path="res://status-effects-skills/classes/skill.gd" id="2_osy60"]
+[ext_resource type="Texture2D" uid="uid://bbmuc2cvuvvuh" path="res://assets/Charmadillo.png" id="3_yekwr"]
+[ext_resource type="Resource" uid="uid://bsl237r3j2m32" path="res://stat system/big_chungus.tres" id="4_5bckt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtx0l"]
+atlas = ExtResource("3_yekwr")
+region = Rect2(0, 0, 192, 192)
+
+[resource]
+script = ExtResource("1_jqk7y")
+name = "Big Chungus"
+stat_block = ExtResource("4_5bckt")
+skills = Array[ExtResource("2_osy60")]([])
+inventory = []
+sprite = SubResource("AtlasTexture_mtx0l")

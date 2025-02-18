@@ -1,6 +1,8 @@
 extends CombatActor
 class_name Combatant
 
+const SCENE : PackedScene = preload("res://scenes/combatant.tscn")
+
 signal action_queued( command : Command )
 signal vitals_updated()
 signal health_changed(new_value)
@@ -30,23 +32,49 @@ var speed : int = 0 :
 var damage : int
 
 @export var status_handler : StatusHandler
-@export var stat_block : StatBlock
 
+var stat_block : StatBlock
+var _data : Entity
 #@export var attribute_container : AttributeContainer
+
+#region Factory
+var _is_player : bool = false
+
+func is_player():
+	return _is_player and is_in_group(GameManager.GROUPS.PLAYERS.id)
+
+static func new_player( data : Entity )->Combatant:
+	var new_player : Combatant = SCENE.instantiate() as Combatant
+	
+	new_player.name = data.name
+	new_player.stat_block = data.stat_block
+	new_player._data = data
+	new_player.add_to_group(GameManager.GROUPS.PLAYERS.id)
+	new_player.set_meta("group", GameManager.GROUPS.PLAYERS.id)
+	
+	new_player._is_player = true
+	return new_player
+
+static func new_enemy( data : Entity )->Combatant:
+	var new_enemy : Combatant = SCENE.instantiate() as Combatant
+	
+	new_enemy.name = data.name
+	new_enemy._data = data.duplicate(true)
+	new_enemy.stat_block = new_enemy._data.stat_block.duplicate(true)
+	
+	new_enemy.add_to_group(GameManager.GROUPS.ENEMIES.id)
+	new_enemy.set_meta("group", GameManager.GROUPS.ENEMIES.id)
+	return new_enemy
+
+#endregion
 
 func _ready() -> void:
 	randomize()
 	status_handler.target = self
-	#max_health = attribute_container.get_stat("max_health").value
-	#health = attribute_container.get_attribute("health").value
-	#attribute_container.get_attribute("health").value_changed.connect(
-		#func(v):
-			#health = v
-	#)
-	#health_changed.connect(
-		#func(v):
-			#attribute_container.get_attribute("health").value = v
-	#)
+	# Creates a unique duplicate to ensure internal resources
+	# are not being shared across multiple combatants
+	stat_block = stat_block.duplicate(true)
+	stat_block.initialize()
 	
 	$Vitals.initialize()
 	
@@ -72,21 +100,33 @@ func queue_command( command : Command )->void:
 	#print("Command queued")
 	#print("%s turn ended." % name)
 
+func attack( target : Combatant )->void:
+	queue_command( 
+		AttackCommand.new( target )
+		.with_damage( stat_block.get_stat("atkPow").value )
+		)
+
+func get_skills()->Array[Skill]:
+	return _data.skills
+
 
 func take_damage( amount : int ):
-	health -= amount
+	stat_block.get_attribute("health").decrease(amount)
+	health_changed.emit(stat_block.get_attribute("health").current_value)
 	if not alive():
 		die()
 
 func alive()->bool:
-	return health > 0
+	return stat_block.get_attribute("health").current_value > 0
 
 func die()->void:
 	#action_queued.emit( Defeated.new( self ).set_priority(Defeated.Priority.HIGH) )
 	await vitals_updated
 	Defeated.new( self ).execute()
 	set_active(false)
+	remove_from_group( get_meta("group") )
 	#Death.new().execute([self])
+
 
 func print_stats():
 	print("\nName: %s\nMax HP: %d\nDamage: %d\nSpeed: %d\n" % [name, max_health, damage, speed])
