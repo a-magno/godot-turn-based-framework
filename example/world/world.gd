@@ -13,7 +13,7 @@ func _on_player_moved(pos: Vector2) -> void:
 		var generated = encounter_manager.generate_encounter( $Player.area )
 		player_steps = 0
 		if generated:
-			get_tree().change_scene_to_packed( encounter_manager.battle_scene )
+			get_tree().change_scene_to_packed( GameManager.BATTLE_SCENE )
 	update_counter()
 
 func update_counter():

@@ -59,7 +59,7 @@ func end_combat(player_win : bool):
 	if player_win:
 		print("Player win")
 		await get_tree().create_timer(0.5).timeout
-		get_tree().change_scene_to_packed(OVERWORLD)
+		get_tree().change_scene_to_packed(GameManager.OVERWORLD)
 	else:
 		print("Enemy win")
 
