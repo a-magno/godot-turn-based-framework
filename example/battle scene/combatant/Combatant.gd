@@ -59,8 +59,8 @@ static func new_enemy( data : Entity )->Combatant:
 	var new_enemy : Combatant = SCENE.instantiate() as Combatant
 	
 	new_enemy.name = data.name
-	new_enemy._data = data.duplicate(true)
-	new_enemy.stat_block = new_enemy._data.stat_block.duplicate(true)
+	new_enemy._data = data
+	new_enemy.stat_block = data.stat_block
 	
 	new_enemy.add_to_group(GameManager.GROUPS.ENEMIES.id)
 	new_enemy.set_meta("group", GameManager.GROUPS.ENEMIES.id)
@@ -73,9 +73,7 @@ func _ready() -> void:
 	status_handler.target = self
 	# Creates a unique duplicate to ensure internal resources
 	# are not being shared across multiple combatants
-	stat_block = stat_block.duplicate(true)
 	stat_block.initialize()
-	
 	$Vitals.initialize()
 	
 	GameManager.event.combat_round_start.connect(_on_round_start)

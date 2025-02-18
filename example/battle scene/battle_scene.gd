@@ -60,10 +60,9 @@ func end_combat(player_win : bool):
 		print("Player win")
 		await get_tree().create_timer(0.5).timeout
 		#get_tree().unload_current_scene()
-		get_tree().change_scene_to_file("res://example/world/overworld.tscn")
-		return
 	else:
 		print("Enemy win")
+	get_tree().change_scene_to_file("res://example/world/overworld.tscn")
 
 func _check_groups():
 	#print("Checking groups...")

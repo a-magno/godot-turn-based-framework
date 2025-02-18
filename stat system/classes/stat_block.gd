@@ -8,20 +8,19 @@ var stats : Dictionary = {}
 @export var base_attributes : Array[Attribute]
 var attributes : Dictionary = {}
 
+## Ensure the statblock has been duplicated first before initializing
 func initialize()->void:
-	stats = {}
-	attributes = {}
 	for s in base_stats:
 		add_stat( s )
 	for a in base_attributes:
 		add_attribute( a )
-	calculate_attributes()
 
 #region Stat handling
 func add_stat( stat : Stat )->void:
-	stats.merge({ stat.id : stat.duplicate() })
+	var new_stat = stat.duplicate()
+	stats.merge({ stat.id : new_stat })
 
-func get_stat( id : StringName, as_object : bool = true )->Stat:
+func get_stat( id : StringName )->Stat:
 	return stats.get( id, null )
 
 func get_stat_value( id : StringName )->float:
@@ -37,9 +36,11 @@ func get_stat_values()->Dictionary:
 
 #region Attribute handling
 func add_attribute( attribute : Attribute )->void:
-	attributes.merge( { attribute.id : attribute })
-	if len(attribute.target_stat) > 0:
-		attribute.find_stat( self )
+	var new_attribute = attribute.duplicate()
+	attributes.merge( { attribute.id : new_attribute })
+	if len(new_attribute.target_stat) > 0:
+		new_attribute.find_stat( self )
+		new_attribute.calculate()
 	
 func get_attribute( id : StringName )->Attribute:
 	return attributes.get( id, null)
@@ -48,7 +49,7 @@ func has_attribute( id : StringName )->bool:
 	return attributes.has( id )
 
 func calculate_attributes()->void:
-	for attr in attributes.values():
+	for attr : Attribute in attributes.values():
 		attr.calculate()
 
 #endregion

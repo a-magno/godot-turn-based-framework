@@ -10,6 +10,7 @@ atlas = ExtResource("3_yekwr")
 region = Rect2(0, 0, 192, 192)
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_jqk7y")
 name = "Big Chungus"
 stat_block = ExtResource("4_5bckt")

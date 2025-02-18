@@ -70,7 +70,7 @@ func calculate()->void:
 			maximize()
 			_initialized = true
 	else:
-		push_warning("Attribute '%' has no assigned Stat." % id)
+		push_warning("Attribute '%s' has no assigned Stat." % id)
 		return
 
 # EOF
