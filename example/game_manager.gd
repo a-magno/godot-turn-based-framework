@@ -23,5 +23,5 @@ static var event : Events = Events.new()
 
 static var player_stats : Entity = preload("res://example/entities/player.tres")
 
-const OVERWORLD : PackedScene = preload("res://example/world/world.tscn")
-const BATTLE_SCENE : PackedScene = preload("res://example/battle scene/battle_scene.tscn")
+static var OVERWORLD : PackedScene = load("res://example/world/overworld.tscn")
+static var BATTLE_SCENE : PackedScene = load("res://example/battle scene/battle_scene.tscn")

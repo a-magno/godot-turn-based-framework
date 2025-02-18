@@ -26,5 +26,5 @@ func generate_encounter( id : StringName ):
 	for i in range(number_to_generate):
 		var new_enemy : Entity = pool.pick_enemy()
 		print(new_enemy.name)
-		current_enemies.push_back( new_enemy )
+		current_enemies.push_back( new_enemy.duplicate(true) )
 	return true
