@@ -75,13 +75,15 @@ func _ready() -> void:
 	# are not being shared across multiple combatants
 	stat_block.initialize()
 	$Vitals.initialize()
-	
+	$Skin.flip_h = is_player()
 	GameManager.event.combat_round_start.connect(_on_round_start)
 	GameManager.event.combat_round_start.connect(_on_round_end)
+
 
 func set_active( _a : bool ):
 	if not alive(): return
 	super(_a)
+
 
 func turn_start()->void:
 	super()
@@ -89,10 +91,13 @@ func turn_start()->void:
 func turn_end()->void:
 	super()
 
+
 func queue_command( command : Command )->void:
 	if acted: return
+	if stat_block.get_attribute("ap").current_value <= 0: return
 	action_queued.emit(command)
 	turn_end()
+	stat_block.get_attribute("ap").decrease()
 	#print(">%s queued command type: %s" % [name, command.get_class_name()])
 	#acted = true
 	#print("Command queued")

@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	
 	for a : Attribute in attribs.values():
 		var lbl := Label.new()
-		lbl.text = "%s : %.1f / %.1f" % [a.id.capitalize(), a.current_value, a.max_value ]
+		lbl.text = "%s : %d / %d" % [a.id.to_upper(), a.current_value, a.max_value ]
 		%StatsContainer.add_child( lbl )
 	
 	%StatsContainer.add_child( HSeparator.new() )
@@ -22,5 +22,5 @@ func _process(delta: float) -> void:
 	for stat : Stat in stats.values():
 		if stat.hidden: continue
 		var lbl := Label.new()
-		lbl.text = "%s : %.1f" % [stat.id.capitalize(), stat.value]
+		lbl.text = "%s : %d" % [stat.id.to_upper(), stat.value]
 		%StatsContainer.add_child( lbl )

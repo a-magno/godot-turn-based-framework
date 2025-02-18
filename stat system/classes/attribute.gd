@@ -34,10 +34,10 @@ func _on_max_stat_changed( stat : Stat )->void:
 
 
 
-func increase( amount : float )->void:
+func increase( amount : float = 1)->void:
 	current_value += amount
 
-func decrease( amount : float )->void:
+func decrease( amount : float = 1 )->void:
 	current_value -= amount
 
 func maximize()->void:
