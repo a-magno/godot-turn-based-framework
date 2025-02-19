@@ -27,10 +27,10 @@ func apply_effects(_targets : Array[Node])->void:
 
 [resource]
 script = SubResource("GDScript_tdifo")
-bonus_damage = 30
+bonus_damage = 5
 status = ExtResource("2_xkyjc")
 id = &"stab"
-cost = 0
+cost = 2
 target = 1
 icon = SubResource("AtlasTexture_l51nc")
 tooltip = "Stab a target. Inflicts Bleeding."

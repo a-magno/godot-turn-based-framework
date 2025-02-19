@@ -14,7 +14,7 @@ var _was_executing : bool = false
 
 func execute_all():
 	if command_stack.is_empty(): return
-
+	command_stack.reverse()
 	while command_stack.size() > 0:
 		if not active:
 			_was_executing = true

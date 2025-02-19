@@ -13,8 +13,9 @@ var bleed_percent := 0.05
 
 func apply(target : Node)->void:
 	if not target is Combatant: return
-	#print(\"expected bleed damage: %.1f\" % (target.max_health * bleed_percent))
-	target.take_damage( ceil(target.max_health * bleed_percent) )
+	var bleed_dmg = ceil(target.stat_block.get_stat(\"maxHealth\").value * bleed_percent)
+	print(\"expected bleed damage: %.1f\" % bleed_dmg)
+	target.take_damage( bleed_dmg )
 	duration -= 1
 "
 

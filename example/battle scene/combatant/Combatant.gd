@@ -94,20 +94,29 @@ func turn_end()->void:
 
 func queue_command( command : Command )->void:
 	if acted: return
-	if stat_block.get_attribute("ap").current_value <= 0: return
+	#if stat_block.get_attribute("ap").current_value <= 0: return
 	action_queued.emit(command)
 	turn_end()
-	stat_block.get_attribute("ap").decrease()
 	#print(">%s queued command type: %s" % [name, command.get_class_name()])
 	#acted = true
 	#print("Command queued")
 	#print("%s turn ended." % name)
 
 func attack( target : Combatant )->void:
+	stat_block.get_attribute("ap").decrease()
 	queue_command( 
 		AttackCommand.new( target )
 		.with_damage( stat_block.get_stat("atkPow").value )
-		)
+	)
+		
+
+func use_skill( skill : Skill, targets : Array[Node])->void:
+	stat_block.get_attribute("ap").decrease( skill.cost )
+	queue_command( 
+		UseSkill.new( skill )
+		.targetting( targets )
+		.used_by( self ) 
+	)
 
 func get_skills()->Array[Skill]:
 	return _data.skills
@@ -138,6 +147,7 @@ func print_stats():
 func _on_round_start()->void:
 	if not alive():
 		die()
+	stat_block.get_attribute("ap").maximize()
 	status_handler.apply_status_by_type( Status.Type.TURN_START )
 
 func _on_round_end()->void:
