@@ -9,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_ydq07")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -48,7 +49,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Skill"
 
+[node name="Items" type="Button" parent="PanelContainer/MarginContainer/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Items"
+
 [node name="Skip" type="Button" parent="PanelContainer/MarginContainer/Actions"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -92,5 +102,31 @@ custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "Move"
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/Actions/Skip" to="." method="_on_skip_pressed"]
+[node name="Attacking" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="PrevMenu" type="Button" parent="PanelContainer/MarginContainer/Attacking"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "<- Back"
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/Attacking"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Targeting an enemy..."
+horizontal_alignment = 1
+
+[node name="Selections" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [connection signal="pressed" from="PanelContainer/MarginContainer/Skills/PrevMenu" to="." method="_on_prev_menu_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Attacking/PrevMenu" to="." method="_on_prev_menu_pressed"]

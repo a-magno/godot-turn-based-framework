@@ -12,6 +12,9 @@ var area : StringName = "":
 		area = v
 		%InTile.text = "Stepping in: %s" % v
 
+func _ready()->void:
+	position = GameManager.player_last_pos
+
 func update_tile():
 	var data = tilemap.get_cell_tile_data(tilemap.local_to_map(position))
 	if data:
@@ -33,4 +36,5 @@ func move()->void:
 	position += target_pos
 	$Icon.position = Vector2.ZERO
 	moving = false
+	GameManager.player_last_pos = position
 	moved.emit( position )

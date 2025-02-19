@@ -23,9 +23,9 @@ func apply_effects(_targets : Array[Node])->void:
 
 [resource]
 script = SubResource("GDScript_k6uep")
-damage_bonus = 40
+damage_bonus = 30
 id = &"bash"
-cost = 0
+cost = 1
 target = 1
 icon = SubResource("AtlasTexture_nirnt")
 tooltip = "Hit enemies really hard!"

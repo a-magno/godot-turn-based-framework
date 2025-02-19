@@ -10,8 +10,8 @@ func _init( _target : Combatant )->void:
 
 func execute():
 	if not is_instance_valid(target): return
-	if attacker:
-		print("%s is attacking %s" % [attacker.name, target.name])
+	#if attacker:
+		#print("%s is attacking %s" % [attacker.name, target.name])
 	var dmg_effect = DamageEffect.new( damage )
 	dmg_effect.execute([target])
 

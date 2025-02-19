@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://3lfa2xi84wxh"]
+
+[ext_resource type="Texture2D" uid="uid://dsfs46axphtkk" path="res://assets/#2 - Transparent Icons & Drop Shadow.png" id="1_hwgha"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4mym"]
+atlas = ExtResource("1_hwgha")
+region = Rect2(0, 288, 32, 32)
+
+[sub_resource type="GDScript" id="GDScript_ook6s"]
+script/source = "extends Item
+class_name HealingPotion
+
+@export var potency : int = 20
+
+func apply_effects( target : Node )->void:
+	super( target )
+	target.stat_block.get_attribute(\"health\").increase( potency )
+"
+
+[resource]
+script = SubResource("GDScript_ook6s")
+potency = 20
+id = &"potion"
+usable_state = 1
+max_stack = 99
+icon = SubResource("AtlasTexture_d4mym")
+tooltip = "A potion capable of healing your wounds."

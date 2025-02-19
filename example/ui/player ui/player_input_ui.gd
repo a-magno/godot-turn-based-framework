@@ -13,6 +13,8 @@ var _prev_tab : Control
 func _enter_tree() -> void:
 	%Attack.pressed.connect(_on_attack_pressed)
 	%Skill.pressed.connect(_on_skill_pressed)
+	%Items.pressed.connect(_on_items_pressed)
+	%Skip.pressed.connect(_on_skip_pressed)
 	#_set_up_skills()
 
 func _set_player( a : Combatant )->void:
@@ -25,12 +27,17 @@ func _set_player( a : Combatant )->void:
 	# Sets new player
 	player = a
 	_set_skills()
-	_active_tab = %Actions
+	process_inputs()
+
+func process_inputs()->void:
+	while player and player.stat_block.get_attribute("ap").current_value > 0:
+		_active_tab = %Actions
+		await player.action_queued
 
 func _on_attack_pressed()->void:
 	#print("Attack Selected...")
 	if player == null: return
-	%Actions.hide()
+	_active_tab = %Attacking
 	var target : Node
 	#print("Waiting for target selection...")
 	while target == null or target.is_in_group(GameManager.GROUPS.PLAYERS.id):
@@ -70,6 +77,19 @@ func _set_skills():
 		btn.icon = skill.icon
 		%SkillsList.add_child( btn )
 		btn.custom_minimum_size = Vector2(80, 0)
+
+func _on_items_pressed()->void:
+	if player == null: return
+	_active_tab = %Selections
+	var inventory = InventoryUI.open_inventory()
+	%Selections.add_child( inventory )
+	var item : Item = await GameManager.event.combat_item_selected
+	player.queue_command( 
+		UseItem.new(item)
+		.on_target(player)
+		.set_priority( Command.Priority.HIGH ) 
+	)
+	InventoryUI.close_inventory(inventory)
 
 func _on_prev_menu_pressed() -> void:
 	_active_tab = _prev_tab

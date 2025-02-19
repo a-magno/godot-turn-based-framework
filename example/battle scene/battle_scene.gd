@@ -23,7 +23,7 @@ var _round_counter : int = 0 :
 func _ready() -> void:
 	GameManager.event.combatant_dead.connect(_on_actor_death)
 	# Adding player first
-	add_to_combat( Combatant.new_player( GameManager.player_stats ) )
+	add_to_combat( Combatant.new_player( GameManager.PLAYER ) )
 	# Adding enemies
 	for enemy in EncounterManager.current_enemies:
 		add_to_combat( Combatant.new_enemy( enemy ) )
@@ -62,6 +62,7 @@ func end_combat(player_win : bool):
 		#get_tree().unload_current_scene()
 	else:
 		print("Enemy win")
+	GameManager.state = GameManager.GameState.OVERWORLD
 	get_tree().change_scene_to_file("res://example/world/overworld.tscn")
 
 func _check_groups():

@@ -1,5 +1,11 @@
 extends Node
-class_name GameManager
+#class_name GameManager
+
+enum GameState {
+	OVERWORLD, BATTLE, NONE
+}
+
+static var state : GameState = GameState.NONE
 
 const GROUPS := {
 	"PLAYERS" : {
@@ -18,10 +24,12 @@ class Events:
 	signal player_skill_selected( skill : Skill )
 	signal combat_round_start()
 	signal combat_round_end()
+	signal combat_item_selected( item : Item )
 
 static var event : Events = Events.new()
 
-static var player_stats : Entity = preload("res://example/entities/player.tres")
+var PLAYER : Entity = preload("res://example/entities/player.tres")
+var player_last_pos : Vector2 = Vector2.ZERO
 
 static var OVERWORLD : PackedScene = load("res://example/world/overworld.tscn")
 static var BATTLE_SCENE : PackedScene = load("res://example/battle scene/battle_scene.tscn")

@@ -27,7 +27,7 @@ var current_actor : CombatActor = null :
 	set(c):
 		current_actor = c
 		if current_actor == null: return
-		print(">Current Actor: %s" % current_actor.name)
+		#print(">Current Actor: %s" % current_actor.name)
 		active_actor_changed.emit( current_actor )
 
 var _actors_sorted : bool = false

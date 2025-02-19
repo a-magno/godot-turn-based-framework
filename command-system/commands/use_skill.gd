@@ -19,3 +19,6 @@ func used_by( actor : Combatant )->UseSkill:
 func targetting( _targets : Array[Node])->UseSkill:
 	targets = _targets
 	return self
+
+func get_class_name()->String:
+	return "UseSkill : %s" % skill.id
