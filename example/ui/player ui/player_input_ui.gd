@@ -53,7 +53,9 @@ func _on_skill_pressed()->void:
 		targets = get_tree().get_nodes_in_group(GameManager.GROUPS.ENEMIES.id)
 	else:
 		targets += [ await GameManager.event.player_target_selected as Node ]
-	player.use_skill( skill, targets as Array[Node] )
+	var success = await player.use_skill( skill, targets as Array[Node] )
+	if not success:
+		_on_skill_pressed()
 	#print(skill.id)
 
 func _on_active_changed( _actor, value )->void:

@@ -28,6 +28,6 @@ void fragment() {
 		}
 	}else
 	{
-		COLOR = texture(TEXTURE, UV);
+		COLOR = mix( texture(TEXTURE, UV), COLOR, 1.0);
 	}
 }

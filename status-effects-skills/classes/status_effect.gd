@@ -1,9 +1,9 @@
 extends Effect
 class_name StatusEffect
 
-var status : Status
+@export var status : Status
 
-func _init( _status : Status )->void:
+func _init( _status : Status = null )->void:
 	status = _status
 
 func execute( _targets : Array[Node] )->void:
@@ -14,3 +14,6 @@ func execute( _targets : Array[Node] )->void:
 				ApplyStatusCommand.new(status.duplicate(), target.status_handler)
 			)
 			#target.status_handler.add_status(status.duplicate())
+
+func _to_string()->String:
+	return "StatusEffect (%s)" % status.id

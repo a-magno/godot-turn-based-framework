@@ -12,3 +12,6 @@ func _init( _status : Status, _target : StatusHandler )->void:
 func execute()->void:
 	if not target: return
 	target.add_status( status )
+
+func _to_string() -> String:
+	return "<ApStatus: %s>" % status.id

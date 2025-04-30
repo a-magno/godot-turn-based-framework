@@ -9,6 +9,8 @@ func _init( _skill : Skill )->void:
 	skill = _skill
 
 func execute()->void:
+	if not user: return
+	await user.play_anim("attack")
 	skill.set_caster( user )
 	skill.use( targets )
 
@@ -20,5 +22,5 @@ func targetting( _targets : Array[Node])->UseSkill:
 	targets = _targets
 	return self
 
-func get_class_name()->String:
-	return "UseSkill : %s" % skill.id
+func _to_string()->String:
+	return "<Skill : %s>" % skill.id

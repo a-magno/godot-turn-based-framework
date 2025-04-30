@@ -36,7 +36,7 @@ var damage : int
 var stat_block : StatBlock
 var _data : Entity
 #@export var attribute_container : AttributeContainer
-
+@onready var _anim_state_machine : AnimationNodeStateMachinePlayback = %AnimationTree.get("parameters/playback")
 #region Factory
 var _is_player : bool = false
 
@@ -79,7 +79,8 @@ func _ready() -> void:
 	$Skin.flip_h = is_player()
 	GameManager.event.combat_round_start.connect(_on_round_start)
 	GameManager.event.combat_round_start.connect(_on_round_end)
-
+	#%AnimationPlayer.animation_finished.connect(_on_animation_finished)
+	%AnimationTree.active = true
 
 func set_active( _a : bool ):
 	if not alive(): return
@@ -105,26 +106,38 @@ func queue_command( command : Command )->void:
 	#print("%s turn ended." % name)
 
 func attack( target : Combatant )->void:
+	#_anim_state_machine.travel("attack")
+	#await %AnimationPlayer.animation_finished
 	stat_block.get_attribute("ap").decrease()
 	queue_command( 
 		AttackCommand.new( target )
+		.by_attacker( self )
 		.with_damage( stat_block.get_stat("atkPow").value )
 	)
 		
 
-func use_skill( skill : Skill, targets : Array[Node])->void:
+func use_skill( skill : Skill, targets : Array[Node])->bool:
+	var has_enough_ap = (stat_block.get_attribute("ap").current_value 
+	- skill.cost ) >= 0
+	if not has_enough_ap:
+		print("Not enough AP!")
+		return false
 	stat_block.get_attribute("ap").decrease( skill.cost )
+	#_anim_state_machine.travel("attack")
+	#await %AnimationPlayer.animation_finished
 	queue_command( 
 		UseSkill.new( skill )
 		.targetting( targets )
 		.used_by( self ) 
 	)
+	return true
 
 func get_skills()->Array[Skill]:
 	return _data.skills
 
 
 func take_damage( amount : int ):
+	await play_anim("hurt")
 	stat_block.get_attribute("health").decrease(amount)
 	health_changed.emit(stat_block.get_attribute("health").current_value)
 	if not alive():
@@ -149,11 +162,16 @@ func print_stats():
 func _on_round_start()->void:
 	if not alive():
 		die()
-	stat_block.get_attribute("ap").maximize()
+	var apRegen = stat_block.get_stat("apRegen")
+	stat_block.get_attribute("ap").increase( apRegen.value if apRegen else 1 )
 	status_handler.apply_status_by_type( Status.Type.TURN_START )
 
 func _on_round_end()->void:
 	if not alive():
 		die()
 	status_handler.apply_status_by_type( Status.Type.TURN_END )
+
+func play_anim( anim_name : String )->void:
+	_anim_state_machine.travel(anim_name)
+	await %AnimationTree.animation_finished
 # EOF #

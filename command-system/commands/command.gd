@@ -16,5 +16,5 @@ func set_priority( value : Priority )->Command:
 	priority = PRIORITIES[value]
 	return self
 
-func get_class_name():
-	return ""
+func _to_string():
+	return "<Cmd>"

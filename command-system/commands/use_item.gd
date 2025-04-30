@@ -6,6 +6,7 @@ var target : Node
 
 func _init( i : Item)->void:
 	item = i
+	priority = PRIORITIES[Priority.HIGH]
 
 func on_target( t : Node )->UseItem:
 	target = t
@@ -14,5 +15,5 @@ func on_target( t : Node )->UseItem:
 func execute()->void:
 	item.use(target)
 
-func get_class_name()->String:
-	return "UseItem : %s" % item.id
+func _to_string()->String:
+	return "<Item : %s>" % item.id

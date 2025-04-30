@@ -8,11 +8,13 @@ enum Targets { SELF, SINGLE, ALL_ENEMIES }
 @export var cost : int
 @export var target : Targets
 var _caster : Node
-
+@export var effects : Array[Effect]
+@export var status : Array[Status]
 
 @export_group("Visuals")
 @export var icon : Texture
 @export_multiline var tooltip : String
+@export var vfx_scene : PackedScene
 
 func is_single_target()->bool:
 	return target == Targets.SINGLE
@@ -35,6 +37,7 @@ func _get_targets( targets : Array[Node])->Array[Node]:
 			return []
 
 func use( targets : Array[Node] )->void:
+	
 	# EventBus.player_onSkillCast.emit()
 	# if _caster != null: _caster.stamina -= cost
 	#print("using skill %s" % self.id)
@@ -44,6 +47,16 @@ func use( targets : Array[Node] )->void:
 		apply_effects( _get_targets(targets) )
 
 func apply_effects(_targets : Array[Node])->void:
-	pass
+	var VFX = null
+	if vfx_scene:
+		VFX = vfx_scene.instantiate()
+	for t : Combatant in _targets:
+		if not t: continue
+		if not t.alive(): continue
+		if vfx_scene:
+			t.add_child(VFX)
+		for effect in effects:
+			print(effect)
+			effect.execute( [t] )
 
 # EOF #

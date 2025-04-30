@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bw5jmcfbmqouo"]
+[gd_scene load_steps=24 format=3 uid="uid://bw5jmcfbmqouo"]
 
 [ext_resource type="Script" path="res://example/battle scene/combatant/Combatant.gd" id="1_ecchv"]
 [ext_resource type="Shader" path="res://scenes/combatant.gdshader" id="2_bfeaa"]
-[ext_resource type="Texture2D" uid="uid://mcb6v6850rv0" path="res://assets/Pouch/Pouch.png" id="3_8636n"]
+[ext_resource type="Texture2D" uid="uid://bbmuc2cvuvvuh" path="res://assets/Charmadillo.png" id="3_0dapx"]
 [ext_resource type="PackedScene" uid="uid://dw7axib8xxycl" path="res://example/ui/vitals.tscn" id="3_bfeaa"]
 [ext_resource type="PackedScene" uid="uid://tw22funjeskh" path="res://scenes/player_target_area.tscn" id="4_4o5d1"]
 [ext_resource type="PackedScene" uid="uid://dejkj5bbgdbdc" path="res://example/ui/stat_viewer.tscn" id="5_fp0kh"]
@@ -13,16 +13,240 @@ resource_local_to_scene = true
 shader = ExtResource("2_bfeaa")
 shader_parameter/enabled = false
 shader_parameter/width = 3
-shader_parameter/outline_color = Color(1, 0, 0, 1)
-shader_parameter/flickering_speed = 5.0
+shader_parameter/outline_color = Color(1, 0.0901961, 0, 1)
+shader_parameter/flickering_speed = 9.0
 shader_parameter/minimal_flickering_alpha = 0.2
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_srv24"]
-atlas = ExtResource("3_8636n")
-region = Rect2(33.3224, 37.2232, 117.355, 118.182)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bfeaa"]
 radius = 40.0
+
+[sub_resource type="Animation" id="Animation_k1bje"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skin:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skin:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skin:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skin:hframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skin:vframes")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_1peky"]
+resource_name = "attack"
+length = 0.500013
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skin:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skin:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [5, 6, 7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skin:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skin:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_ujbf0"]
+resource_name = "hurt"
+length = 0.625013
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skin:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.092397, 0.0923971, 0.092397, 1), Color(1, 1, 1, 1), Color(0.092397, 0.0923971, 0.092397, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6tewq"]
+resource_name = "idle"
+length = 0.500013
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skin:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skin:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skin:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skin:frame_coords")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k0cbl"]
+_data = {
+"RESET": SubResource("Animation_k1bje"),
+"attack": SubResource("Animation_1peky"),
+"hurt": SubResource("Animation_ujbf0"),
+"idle": SubResource("Animation_6tewq")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_862j2"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dxjdh"]
+animation = &"hurt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_avaha"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sqnpj"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y1ecu"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qkedx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3psms"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n4sac"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_adgyv"]
+states/attack/node = SubResource("AnimationNodeAnimation_862j2")
+states/attack/position = Vector2(322, 26)
+states/hurt/node = SubResource("AnimationNodeAnimation_dxjdh")
+states/hurt/position = Vector2(445, 100)
+states/idle/node = SubResource("AnimationNodeAnimation_avaha")
+states/idle/position = Vector2(322, 97)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_sqnpj"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_y1ecu"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_qkedx"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_3psms"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_n4sac")]
 
 [node name="Combatant" type="Node2D" node_paths=PackedStringArray("status_handler")]
 script = ExtResource("1_ecchv")
@@ -32,7 +256,10 @@ metadata/_custom_type_script = ExtResource("1_ecchv")
 [node name="Skin" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_8636n")
 scale = Vector2(0.5, 0.5)
-texture = SubResource("AtlasTexture_srv24")
+texture = ExtResource("3_0dapx")
+hframes = 4
+vframes = 2
+frame = 4
 
 [node name="Vitals" parent="." node_paths=PackedStringArray("combatant") instance=ExtResource("3_bfeaa")]
 offset_left = -80.0
@@ -44,28 +271,34 @@ combatant = NodePath("..")
 [node name="StatViewer" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("5_fp0kh")]
 unique_name_in_owner = true
 z_index = 1
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 48.0
 offset_top = -24.0
 offset_right = 272.0
 offset_bottom = -24.0
-grow_horizontal = 1
-grow_vertical = 1
-mouse_filter = 2
 actor = NodePath("..")
 
-[node name="Area2D" parent="." node_paths=PackedStringArray("skin") instance=ExtResource("4_4o5d1")]
+[node name="TargetArea" parent="." node_paths=PackedStringArray("skin") instance=ExtResource("4_4o5d1")]
 skin = NodePath("../Skin")
 
-[node name="CollisionShape2D" parent="Area2D" index="0"]
+[node name="CollisionShape2D" parent="TargetArea" index="0"]
 shape = SubResource("CircleShape2D_bfeaa")
 
 [node name="StatusHandler" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("6_i344d")
 target = NodePath("..")
 
-[connection signal="health_changed" from="." to="Area2D" method="_on_combatant_health_changed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_k0cbl")
+}
 
-[editable path="Area2D"]
+[node name="AnimationTree" type="AnimationTree" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
+tree_root = SubResource("AnimationNodeStateMachine_adgyv")
+anim_player = NodePath("../AnimationPlayer")
+
+[connection signal="health_changed" from="." to="TargetArea" method="_on_combatant_health_changed"]
+
+[editable path="TargetArea"]

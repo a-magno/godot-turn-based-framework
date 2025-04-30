@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://3lfa2xi84wxh"]
+[gd_resource type="Resource" script_class="HealingPotion" load_steps=4 format=3 uid="uid://3lfa2xi84wxh"]
 
 [ext_resource type="Texture2D" uid="uid://dsfs46axphtkk" path="res://assets/#2 - Transparent Icons & Drop Shadow.png" id="1_hwgha"]
 

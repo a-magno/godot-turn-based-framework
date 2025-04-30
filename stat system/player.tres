@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatBlock" load_steps=10 format=3 uid="uid://dxnvu1m370jb4"]
+[gd_resource type="Resource" script_class="StatBlock" load_steps=11 format=3 uid="uid://dxnvu1m370jb4"]
 
 [ext_resource type="Script" path="res://stat system/classes/attribute.gd" id="1_eeque"]
 [ext_resource type="Script" path="res://stat system/classes/stat.gd" id="2_kgxci"]
@@ -42,8 +42,14 @@ id = &"maxAp"
 _base_value = 3.0
 hidden = true
 
+[sub_resource type="Resource" id="Resource_xvj5k"]
+script = ExtResource("2_kgxci")
+id = &"apRegen"
+_base_value = 2.0
+hidden = false
+
 [resource]
 script = ExtResource("3_lmupf")
 name = "Player"
-base_stats = Array[ExtResource("2_kgxci")]([SubResource("Resource_ljmtn"), SubResource("Resource_u4pqj"), SubResource("Resource_18liu"), SubResource("Resource_cua65")])
+base_stats = Array[ExtResource("2_kgxci")]([SubResource("Resource_ljmtn"), SubResource("Resource_u4pqj"), SubResource("Resource_18liu"), SubResource("Resource_cua65"), SubResource("Resource_xvj5k")])
 base_attributes = Array[ExtResource("1_eeque")]([SubResource("Resource_126jo"), SubResource("Resource_y47as")])

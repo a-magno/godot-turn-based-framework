@@ -1,32 +1,21 @@
-[gd_resource type="Resource" load_steps=5 format=3 uid="uid://csp61myybocek"]
+[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://csp61myybocek"]
 
 [ext_resource type="Texture2D" uid="uid://dsfs46axphtkk" path="res://assets/#2 - Transparent Icons & Drop Shadow.png" id="1_ilsrt"]
+[ext_resource type="Script" path="res://status-effects-skills/classes/effect.gd" id="1_j6lr0"]
 [ext_resource type="Script" path="res://status-effects-skills/classes/skill.gd" id="1_k6uep"]
+[ext_resource type="Script" path="res://status-effects-skills/classes/status.gd" id="4_pkxi4"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nirnt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvey6"]
 atlas = ExtResource("1_ilsrt")
-region = Rect2(352, 96, 32, 32)
-
-[sub_resource type="GDScript" id="GDScript_k6uep"]
-script/source = "extends Skill
-
-@export var damage_bonus : int
-
-func apply_effects(_targets : Array[Node])->void:
-	for target in _targets:
-		_caster.queue_command( 
-			AttackCommand.new( target )
-			.by_attacker(_caster)
-			.modify_damage(damage_bonus) 
-		)
-"
+region = Rect2(480, 160, 32, 32)
 
 [resource]
-script = SubResource("GDScript_k6uep")
-damage_bonus = 30
+script = ExtResource("1_k6uep")
 id = &"bash"
 cost = 1
 target = 1
-icon = SubResource("AtlasTexture_nirnt")
-tooltip = "Hit enemies really hard!"
+effects = Array[ExtResource("1_j6lr0")]([])
+status = Array[ExtResource("4_pkxi4")]([])
+icon = SubResource("AtlasTexture_qvey6")
+tooltip = "Hit enemies real hard!"
 metadata/_custom_type_script = ExtResource("1_k6uep")

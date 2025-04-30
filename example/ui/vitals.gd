@@ -11,8 +11,8 @@ func initialize()->void:
 	%Healthbar.max_value = combatant.stat_block.get_stat("maxHealth").value
 	%Healthbar.value = combatant.stat_block.get_attribute("health").current_value
 	_update_label(%Healthbar.value, %Healthbar.max_value)
-	%ActionPoints.max_value = combatant.stat_block.get_stat("maxAp").value
-	%ActionPoints.value = combatant.stat_block.get_attribute("ap").current_value
+	%ActionPips.max_value = combatant.stat_block.get_stat("maxAp").value
+	%ActionPips.value = combatant.stat_block.get_attribute("ap").current_value
 	%Name.text = combatant.name
 	
 	var status_handler : StatusHandler = combatant.find_child("*StatusHandler*")
@@ -32,4 +32,4 @@ func _update_label(value, max_value)->void:
 	%HealthLabel.text = "%d / %d" % [clamp(value, 0, max_value), max_value]
 
 func _update_ap( _value : float )->void:
-	%ActionPoints.value = _value
+	%ActionPips.value = int(_value)

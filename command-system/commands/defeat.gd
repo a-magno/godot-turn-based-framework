@@ -11,5 +11,5 @@ func execute():
 	#print("%s has been defeated." % target.name)
 	GameManager.event.combatant_dead.emit(target)
 
-func get_class_name()->String:
-	return "Defeated"
+func _to_string()->String:
+	return "<Defeat>"

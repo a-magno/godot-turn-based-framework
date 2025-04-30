@@ -21,7 +21,7 @@ func execute_all():
 			return
 			
 		var command = command_stack.pop_front()
-		command.execute()
+		await command.execute()
 		# Put commands in command history
 		if log_commands:
 			_command_history.push_front(command)
@@ -30,11 +30,12 @@ func execute_all():
 func clear()->void:
 	command_stack.clear()
 
-func get_commands()->Array[String]:
-	var out : Array[String]
-	for c in command_stack:
-		out.append(c.get_class_name())
-	return out
+func get_commands()->Array[Command]:
+	#var out : Array[String]
+	#for c in command_stack:
+		#out.append(c.get_class_name())
+	#return out
+	return command_stack
 
 func command_queued( command : Command )->void:
 	#print_debug("Command queued.")
