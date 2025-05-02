@@ -29,6 +29,7 @@ unique_name_in_owner = true
 script = ExtResource("3_5g7vw")
 
 [node name="EnemyAI" type="Node" parent="."]
+process_mode = 1
 process_priority = 1
 script = ExtResource("7_vtmj2")
 

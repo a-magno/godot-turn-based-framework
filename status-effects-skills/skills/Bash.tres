@@ -1,9 +1,22 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://csp61myybocek"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://csp61myybocek"]
 
 [ext_resource type="Texture2D" uid="uid://dsfs46axphtkk" path="res://assets/#2 - Transparent Icons & Drop Shadow.png" id="1_ilsrt"]
 [ext_resource type="Script" path="res://status-effects-skills/classes/effect.gd" id="1_j6lr0"]
 [ext_resource type="Script" path="res://status-effects-skills/classes/skill.gd" id="1_k6uep"]
+[ext_resource type="Script" path="res://example/effects/damage_attribute_effect.gd" id="2_pkh17"]
 [ext_resource type="Script" path="res://status-effects-skills/classes/status.gd" id="4_pkxi4"]
+
+[sub_resource type="Resource" id="Resource_5sa2v"]
+script = ExtResource("2_pkh17")
+amount = 25
+type = 1
+target_stat = &"maxHp"
+
+[sub_resource type="Resource" id="Resource_86fn4"]
+script = ExtResource("2_pkh17")
+amount = 1
+type = 0
+target_stat = &"ap"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qvey6"]
 atlas = ExtResource("1_ilsrt")
@@ -12,10 +25,10 @@ region = Rect2(480, 160, 32, 32)
 [resource]
 script = ExtResource("1_k6uep")
 id = &"bash"
-cost = 1
+cost = 2
 target = 1
-effects = Array[ExtResource("1_j6lr0")]([])
+effects = Array[ExtResource("1_j6lr0")]([SubResource("Resource_5sa2v"), SubResource("Resource_86fn4")])
 status = Array[ExtResource("4_pkxi4")]([])
 icon = SubResource("AtlasTexture_qvey6")
-tooltip = "Hit enemies real hard!"
+tooltip = "Hit enemies real hard and make them lose some AP!"
 metadata/_custom_type_script = ExtResource("1_k6uep")

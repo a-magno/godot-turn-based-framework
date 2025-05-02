@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://cst5q36w87wl0"]
+
+[ext_resource type="Script" path="res://scenes/health_display.gd" id="1_hsajm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkmv7"]
+bg_color = Color(0, 0, 0, 0.333333)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u3td5"]
+bg_color = Color(0, 0.727155, 0.12854, 1)
+
+[node name="HealthDisplay" type="PanelContainer"]
+custom_minimum_size = Vector2(160, 32)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_hsajm")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Player"
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_hkmv7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_u3td5")
+value = 50.0
+show_percentage = false

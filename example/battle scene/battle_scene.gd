@@ -91,4 +91,15 @@ func add_to_combat( actor : Combatant ):
 	%TurnManager.add_to_queue(actor)
 	actor.action_queued.connect(%CommandQueue.command_queued)
 	actor.set_active(true)
-	
+
+# EOF
+
+#region FUN TEST FUNCTIONS
+func round_start()->void:
+	for actor : Combatant in %TurnManager._combat_actors:
+		actor._on_round_start()
+
+func round_end()->void:
+	for actor : Combatant in %TurnManager._combat_actors:
+		actor._on_round_end()
+#endregion

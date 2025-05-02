@@ -4,17 +4,19 @@
 [ext_resource type="Texture2D" uid="uid://dsfs46axphtkk" path="res://assets/#2 - Transparent Icons & Drop Shadow.png" id="1_noae8"]
 [ext_resource type="Script" path="res://status-effects-skills/classes/status.gd" id="1_oe3q1"]
 [ext_resource type="Script" path="res://status-effects-skills/effects/damage.gd" id="2_2dnre"]
-[ext_resource type="Resource" uid="uid://ovd0qkciwmb8" path="res://status-effects-skills/status/Bleeding.tres" id="2_5rr5k"]
 [ext_resource type="Script" path="res://status-effects-skills/classes/status_effect.gd" id="3_gmks8"]
+[ext_resource type="Resource" uid="uid://clk0al3vxq82o" path="res://status-effects-skills/status/Bleed.tres" id="4_ujb8r"]
 [ext_resource type="Script" path="res://status-effects-skills/classes/skill.gd" id="6_f7w6v"]
 
 [sub_resource type="Resource" id="Resource_p578n"]
 script = ExtResource("2_2dnre")
 amount = 15
+type = 1
+target_stat = &"maxHp"
 
 [sub_resource type="Resource" id="Resource_dmxy8"]
 script = ExtResource("3_gmks8")
-status = ExtResource("2_5rr5k")
+status = ExtResource("4_ujb8r")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w6e1t"]
 atlas = ExtResource("1_noae8")
@@ -23,7 +25,7 @@ region = Rect2(0, 96, 32, 32)
 [resource]
 script = ExtResource("6_f7w6v")
 id = &"stab"
-cost = 5
+cost = 3
 target = 1
 effects = Array[ExtResource("1_210qp")]([SubResource("Resource_p578n"), SubResource("Resource_dmxy8")])
 status = Array[ExtResource("1_oe3q1")]([])

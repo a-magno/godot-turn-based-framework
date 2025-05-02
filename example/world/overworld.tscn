@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://du7yhjo6ojtml"]
+[gd_scene load_steps=12 format=4 uid="uid://du7yhjo6ojtml"]
 
 [ext_resource type="Script" path="res://example/world/world.gd" id="1_rakl5"]
 [ext_resource type="Texture2D" uid="uid://tvu1ny4rsdew" path="res://assets/world.png" id="2_f7hgp"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://encounter_system/EncounterManager.gd" id="4_wa2nn"]
 [ext_resource type="Script" path="res://encounter_system/encounter_pool.gd" id="5_xr33q"]
 [ext_resource type="Resource" uid="uid://c7noyobn3fq4m" path="res://example/world/encounter pools/world1.tres" id="6_3rg3y"]
+[ext_resource type="PackedScene" uid="uid://cst5q36w87wl0" path="res://scenes/health_display.tscn" id="7_8q2r7"]
+[ext_resource type="Resource" uid="uid://bak3pptei7l38" path="res://example/entities/player.tres" id="8_m2204"]
+[ext_resource type="Resource" uid="uid://dxnvu1m370jb4" path="res://stat system/player.tres" id="9_3fgjq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_favg0"]
 texture = ExtResource("2_f7hgp")
@@ -47,20 +50,33 @@ encounter_steps = 5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="EncounterIn" type="Label" parent="CanvasLayer"]
-unique_name_in_owner = true
-visible = false
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 24
-
-[node name="PlayerWindows" type="HBoxContainer" parent="CanvasLayer"]
-unique_name_in_owner = true
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="EncounterIn" type="Label" parent="CanvasLayer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+
+[node name="PlayerWindows" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HealthDisplay" parent="CanvasLayer/MarginContainer" instance=ExtResource("7_8q2r7")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+entity_data = ExtResource("8_m2204")
+stat_block = ExtResource("9_3fgjq")
 
 [connection signal="moved" from="Player" to="." method="_on_player_moved"]

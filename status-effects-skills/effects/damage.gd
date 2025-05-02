@@ -1,7 +1,9 @@
+@tool
 extends Effect
 class_name DamageEffect
 
 @export var amount : int = 0
+
 
 func execute( _targets : Array[Node] )->void:
 	for target in _targets:
@@ -9,6 +11,7 @@ func execute( _targets : Array[Node] )->void:
 		if target is Combatant:
 			target.take_damage( amount )
 
+			
 func set_damage( a : int )->DamageEffect:
 	amount = a
 	return self

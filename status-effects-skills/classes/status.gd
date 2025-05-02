@@ -4,7 +4,7 @@ class_name Status
 signal status_applied( status : Status )
 signal status_changed( status : Status )
 
-enum Type {TURN_START, TURN_END, ROUND_START, ROUND_END, EVENT}
+enum Trigger {TURN_START, TURN_END, ROUND_START, ROUND_END, EVENT, ON_EXPIRE}
 enum Stack {NONE, INTENSITY, DURATION}
 
 @export_group("Data")
@@ -12,8 +12,10 @@ enum Stack {NONE, INTENSITY, DURATION}
 @export var duration : int : set = set_duration
 @export var max_stacks : int
 var stacks : int : set = set_stacks
-@export var type : Type
+@export var type : Trigger
 @export var stack_type : Stack
+
+@export var effects : Array[Effect]
 
 @export_group("Details")
 @export var icon : Texture
@@ -24,6 +26,8 @@ func initialize( target : Node )->void:
 
 func apply( target : Node )->void:
 	status_applied.emit(self)
+	for e in effects:
+		e.execute( [target] )
 
 func can_expire()->bool:
 	return duration > -1
@@ -35,4 +39,5 @@ func set_stacks( value : int )->void:
 func set_duration( value : int )->void:
 	duration = value
 	#print_debug("%s duration changed to %d" % [id, value])
+	
 	status_changed.emit( self )

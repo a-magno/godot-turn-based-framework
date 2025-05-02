@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://example/battle scene/combatant/Combatant.gd" id="1_ecchv"]
 [ext_resource type="Shader" path="res://scenes/combatant.gdshader" id="2_bfeaa"]
-[ext_resource type="Texture2D" uid="uid://bbmuc2cvuvvuh" path="res://assets/Charmadillo.png" id="3_0dapx"]
+[ext_resource type="Texture2D" uid="uid://mcb6v6850rv0" path="res://assets/Pouch/Pouch.png" id="3_3m1n5"]
 [ext_resource type="PackedScene" uid="uid://dw7axib8xxycl" path="res://example/ui/vitals.tscn" id="3_bfeaa"]
 [ext_resource type="PackedScene" uid="uid://tw22funjeskh" path="res://scenes/player_target_area.tscn" id="4_4o5d1"]
 [ext_resource type="PackedScene" uid="uid://dejkj5bbgdbdc" path="res://example/ui/stat_viewer.tscn" id="5_fp0kh"]
@@ -256,7 +256,7 @@ metadata/_custom_type_script = ExtResource("1_ecchv")
 [node name="Skin" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_8636n")
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_0dapx")
+texture = ExtResource("3_3m1n5")
 hframes = 4
 vframes = 2
 frame = 4

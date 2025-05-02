@@ -1,8 +1,6 @@
 extends Node
 class_name CommandQueue
 
-
-	
 signal stack_empty()
 
 @export var active : bool = true

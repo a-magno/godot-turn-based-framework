@@ -100,10 +100,10 @@ func queue_command( command : Command )->void:
 	action_queued.emit(command)
 	if stat_block.get_attribute("ap").current_value <= 0:
 		turn_end()
-	#print(">%s queued command type: %s" % [name, command.get_class_name()])
+	print(">%s queued command type: %s" % [name, str(command)])
 	#acted = true
 	#print("Command queued")
-	#print("%s turn ended." % name)
+	print("%s turn ended." % name)
 
 func attack( target : Combatant )->void:
 	#_anim_state_machine.travel("attack")
@@ -114,7 +114,6 @@ func attack( target : Combatant )->void:
 		.by_attacker( self )
 		.with_damage( stat_block.get_stat("atkPow").value )
 	)
-		
 
 func use_skill( skill : Skill, targets : Array[Node])->bool:
 	var has_enough_ap = (stat_block.get_attribute("ap").current_value 
@@ -162,14 +161,13 @@ func print_stats():
 func _on_round_start()->void:
 	if not alive():
 		die()
-	var apRegen = stat_block.get_stat("apRegen")
-	stat_block.get_attribute("ap").increase( apRegen.value if apRegen else 1 )
-	status_handler.apply_status_by_type( Status.Type.TURN_START )
+	stat_block.get_attribute("ap").maximize()
+	status_handler.apply_status_by_type( Status.Trigger.TURN_START )
 
 func _on_round_end()->void:
 	if not alive():
 		die()
-	status_handler.apply_status_by_type( Status.Type.TURN_END )
+	status_handler.apply_status_by_type( Status.Trigger.TURN_END )
 
 func play_anim( anim_name : String )->void:
 	_anim_state_machine.travel(anim_name)

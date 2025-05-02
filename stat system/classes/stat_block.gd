@@ -21,7 +21,8 @@ func add_stat( stat : Stat )->void:
 	stats.merge({ stat.id : new_stat })
 
 func get_stat( id : StringName )->Stat:
-	return stats.get( id, null )
+	return stats.get( id,
+		base_stats.filter( func ( s : Stat ): return s.id == id ).front() )
 
 func get_stat_value( id : StringName )->float:
 	return 0.0 if not stats.has( id ) else stats.get( id ).value
@@ -43,7 +44,7 @@ func add_attribute( attribute : Attribute )->void:
 		new_attribute.calculate()
 	
 func get_attribute( id : StringName )->Attribute:
-	return attributes.get( id, null)
+	return attributes.get( id, base_attributes.filter( func ( a : Attribute ): return a.id == id ).front() )
 	
 func has_attribute( id : StringName )->bool:
 	return attributes.has( id )

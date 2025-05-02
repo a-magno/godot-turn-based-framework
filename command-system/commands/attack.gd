@@ -10,11 +10,10 @@ func _init( _target : Combatant )->void:
 
 func execute():
 	if not attacker or not attacker.alive(): return
-	if not is_instance_valid(target): return
 	await attacker.play_anim("attack")
-	#if attacker:
-		#print("%s is attacking %s" % [attacker.name, target.name])
+	
 	var dmg_effect = DamageEffect.new().set_damage(damage)
+	if not is_instance_valid(target): return
 	dmg_effect.execute([target])
 
 func modify_damage( value : int )->AttackCommand:

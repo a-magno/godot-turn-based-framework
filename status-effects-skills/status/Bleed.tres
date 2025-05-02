@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Status" load_steps=7 format=3 uid="uid://clk0al3vxq82o"]
+
+[ext_resource type="Script" path="res://status-effects-skills/classes/effect.gd" id="1_xn4rs"]
+[ext_resource type="Script" path="res://status-effects-skills/effects/damage.gd" id="2_ljsya"]
+[ext_resource type="Script" path="res://status-effects-skills/classes/status.gd" id="2_sqq6e"]
+[ext_resource type="Texture2D" uid="uid://dsfs46axphtkk" path="res://assets/#2 - Transparent Icons & Drop Shadow.png" id="3_t4elb"]
+
+[sub_resource type="Resource" id="Resource_1vhqw"]
+script = ExtResource("2_ljsya")
+amount = 5
+type = 0
+target_stat = &"maxHealth"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7e5d1"]
+atlas = ExtResource("3_t4elb")
+region = Rect2(0, 96, 32, 32)
+
+[resource]
+script = ExtResource("2_sqq6e")
+id = &"Bleeding"
+duration = 5
+max_stacks = 1
+type = 0
+stack_type = 2
+effects = Array[ExtResource("1_xn4rs")]([SubResource("Resource_1vhqw")])
+icon = SubResource("AtlasTexture_7e5d1")
+tooltip = ""

@@ -11,7 +11,7 @@
 
 [resource]
 script = ExtResource("1_dkk4s")
-name = "Player"
+name = "ThePlayer"
 stat_block = ExtResource("6_yv0sg")
 skills = Array[ExtResource("2_2t4nt")]([ExtResource("3_aka2u"), ExtResource("4_rey1d")])
 inventory = Array[ExtResource("1_abwwt")]([ExtResource("2_m1lon")])

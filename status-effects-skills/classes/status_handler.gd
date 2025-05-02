@@ -5,13 +5,13 @@ class_name StatusHandler
 signal new_status_added( status : Status )
 
 ## Emitted when all status of a given type are applied to target. 
-signal statuses_applied( type : Status.Type )
+signal statuses_applied( type : Status.Trigger )
 @export var target : Node
 
 var status_stack : Dictionary = {}
 
-func apply_status_by_type( status_type : Status.Type )->void:
-	if status_type == Status.Type.EVENT: return
+func apply_status_by_type( status_type : Status.Trigger )->void:
+	if status_type == Status.Trigger.EVENT: return
 	var queue = _get_all_status().filter(
 		func( status : Status ):
 			return status.type == status_type
