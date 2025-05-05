@@ -5,5 +5,9 @@ extends PanelContainer
 
 func _process(delta: float) -> void:
 	%Name.text = entity_data.name
-	%HealthBar.value = stat_block.get_attribute("health").current_value
-	%HealthBar.max_value = stat_block.get_attribute("health").max_value
+	
+	var value = stat_block.get_attribute("health").current_value
+	var max_value = stat_block.get_attribute("health").max_value
+	%HealthBar.value = value
+	%HealthBar.max_value = max_value
+	$MarginContainer/VBoxContainer/HealthBar/Label.text = "%d/%d" %[value, max_value]

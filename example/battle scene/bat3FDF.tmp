@@ -68,4 +68,4 @@ theme_override_constants/outline_size = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[connection signal="active_actor_changed" from="TurnManager" to="CanvasLayer/PlayerInput UI" method="set_player"]
+[connection signal="active_actor_changed" from="TurnManager" to="CanvasLayer/PlayerInput UI" method="_set_player"]

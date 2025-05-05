@@ -33,3 +33,7 @@ func _update_label(value, max_value)->void:
 
 func _update_ap( _value : float )->void:
 	%ActionPips.value = int(_value)
+
+
+func _on_force_turn_end_pressed() -> void:
+	combatant.turn_end()

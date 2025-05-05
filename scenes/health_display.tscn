@@ -31,9 +31,24 @@ text = "Player"
 
 [node name="HealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 4)
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_hkmv7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_u3td5")
 value = 50.0
 show_percentage = false
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HealthBar"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "100/100"
+horizontal_alignment = 1

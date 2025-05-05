@@ -8,8 +8,6 @@
 [sub_resource type="Resource" id="Resource_1vhqw"]
 script = ExtResource("2_ljsya")
 amount = 5
-type = 0
-target_stat = &"maxHealth"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7e5d1"]
 atlas = ExtResource("3_t4elb")

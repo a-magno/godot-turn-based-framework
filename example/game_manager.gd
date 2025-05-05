@@ -33,3 +33,6 @@ var player_last_pos : Vector2 = Vector2.ZERO
 
 static var OVERWORLD : PackedScene = load("res://example/world/overworld.tscn")
 static var BATTLE_SCENE : PackedScene = load("res://example/battle scene/battle_scene.tscn")
+
+func wait( time : float )->void:
+	await get_tree().create_timer( time ).timeout

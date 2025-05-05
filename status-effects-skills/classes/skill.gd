@@ -7,7 +7,9 @@ enum Targets { SELF, SINGLE, ALL_ENEMIES }
 @export var id : StringName
 @export var cost : int
 @export var target : Targets
+@export var chance_to_hit : float = 1.0
 var _caster : Node
+@export_subgroup("Effect Data")
 @export var effects : Array[Effect]
 @export var status : Array[Status]
 

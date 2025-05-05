@@ -91,6 +91,7 @@ func turn_start()->void:
 	super()
 
 func turn_end()->void:
+	print("%s turn ended." % name)
 	super()
 
 
@@ -98,12 +99,10 @@ func queue_command( command : Command )->void:
 	if acted: return
 	#if stat_block.get_attribute("ap").current_value <= 0: return
 	action_queued.emit(command)
-	if stat_block.get_attribute("ap").current_value <= 0:
-		turn_end()
 	print(">%s queued command type: %s" % [name, str(command)])
+	print(name, " is AP depleted? : ", stat_block.get_attribute("ap").is_depleted())
 	#acted = true
 	#print("Command queued")
-	print("%s turn ended." % name)
 
 func attack( target : Combatant )->void:
 	#_anim_state_machine.travel("attack")

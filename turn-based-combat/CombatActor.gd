@@ -18,7 +18,7 @@ func turn_start()->void:
 
 func turn_end()->void:
 	active = false
-	acted = true
+	#acted = true
 	turn_ended.emit(self)
 
 

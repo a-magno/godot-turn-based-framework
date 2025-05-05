@@ -73,4 +73,6 @@ func calculate()->void:
 		push_warning("Attribute '%s' has no assigned Stat." % id)
 		return
 
+func is_depleted()->bool:
+	return current_value == 0
 # EOF
